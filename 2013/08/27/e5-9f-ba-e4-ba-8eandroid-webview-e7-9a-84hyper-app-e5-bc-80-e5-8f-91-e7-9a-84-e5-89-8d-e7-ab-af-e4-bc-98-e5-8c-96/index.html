@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>基于Android Webview的Hybrid App开发的前端优化 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近做一个项目，是将一个相对复杂（内容后台模块化配置）的mobile web页面嵌入到Android的webview展示，把遇到的问题和一些经验总结下 （1）图片！图片！图片！ 我觉得不管是原生App还是Web App，加载优化的第一条就是合理的设置图片，这点往往容易被忽视。一切只在WIFI环境下的测试都是耍流氓！ 这个项目的主页面，一开始前端负责切图的同事给出的静态页居然有1M多，其中最大的一">
+<meta name="keywords" content="javascript,前端,hybrid app,Android,webview">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于Android Webview的Hybrid App开发的前端优化">
+<meta property="og:url" content="http://yoursite.com/2013/08/27/e5-9f-ba-e4-ba-8eandroid-webview-e7-9a-84hyper-app-e5-bc-80-e5-8f-91-e7-9a-84-e5-89-8d-e7-ab-af-e4-bc-98-e5-8c-96/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="最近做一个项目，是将一个相对复杂（内容后台模块化配置）的mobile web页面嵌入到Android的webview展示，把遇到的问题和一些经验总结下 （1）图片！图片！图片！ 我觉得不管是原生App还是Web App，加载优化的第一条就是合理的设置图片，这点往往容易被忽视。一切只在WIFI环境下的测试都是耍流氓！ 这个项目的主页面，一开始前端负责切图的同事给出的静态页居然有1M多，其中最大的一">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://awebird.com/blog/wp-content/uploads/2013/08/webview-300x102.jpg">
+<meta property="og:image" content="http://yoursite.com/2013/08/27/e5-9f-ba-e4-ba-8eandroid-webview-e7-9a-84hyper-app-e5-bc-80-e5-8f-91-e7-9a-84-e5-89-8d-e7-ab-af-e4-bc-98-e5-8c-96/upload/images/other/load_full.jpg">
+<meta property="og:image" content="http://yoursite.com/2013/08/27/e5-9f-ba-e4-ba-8eandroid-webview-e7-9a-84hyper-app-e5-bc-80-e5-8f-91-e7-9a-84-e5-89-8d-e7-ab-af-e4-bc-98-e5-8c-96/upload/images/other/load_half.jpg">
+<meta property="og:updated_time" content="2018-06-02T07:21:53.105Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于Android Webview的Hybrid App开发的前端优化">
+<meta name="twitter:description" content="最近做一个项目，是将一个相对复杂（内容后台模块化配置）的mobile web页面嵌入到Android的webview展示，把遇到的问题和一些经验总结下 （1）图片！图片！图片！ 我觉得不管是原生App还是Web App，加载优化的第一条就是合理的设置图片，这点往往容易被忽视。一切只在WIFI环境下的测试都是耍流氓！ 这个项目的主页面，一开始前端负责切图的同事给出的静态页居然有1M多，其中最大的一">
+<meta name="twitter:image" content="http://awebird.com/blog/wp-content/uploads/2013/08/webview-300x102.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-e5-9f-ba-e4-ba-8eandroid-webview-e7-9a-84hyper-app-e5-bc-80-e5-8f-91-e7-9a-84-e5-89-8d-e7-ab-af-e4-bc-98-e5-8c-96" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/08/27/e5-9f-ba-e4-ba-8eandroid-webview-e7-9a-84hyper-app-e5-bc-80-e5-8f-91-e7-9a-84-e5-89-8d-e7-ab-af-e4-bc-98-e5-8c-96/" class="article-date">
+  <time datetime="2013-08-27T15:03:51.000Z" itemprop="datePublished">2013-08-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      基于Android Webview的Hybrid App开发的前端优化
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://awebird.com/blog/wp-content/uploads/2013/08/webview.jpg" target="_blank" rel="noopener"><img src="http://awebird.com/blog/wp-content/uploads/2013/08/webview-300x102.jpg" alt="webview"></a> 最近做一个项目，是将一个相对复杂（内容后台模块化配置）的mobile web页面嵌入到Android的webview展示，把遇到的问题和一些经验总结下 <strong>（1）图片！图片！图片！</strong> 我觉得不管是原生App还是Web App，加载优化的第一条就是合理的设置图片，这点往往容易被忽视。一切只在WIFI环境下的测试都是耍流氓！ 这个项目的主页面，一开始前端负责切图的同事给出的静态页居然有1M多，其中最大的一张banner图接近300K! 直接从PSD切出来的高保真原汁原味的展示效果确实震撼，百分比布局下，在chrome放到全屏显示还是清晰无比。理想很丰满，现实却骨感，可惜我们不是生活在Provo，没有google fiber的情况下只能忍痛牺牲这种“网络不能承受之美”。wap页面就是手机上看的，一般4~5寸屏幕能清晰显示，6寸‘巨屏’牺牲点效果不影响使用就足够了。 目前总结大致的图片组成</p>
+<ul>
+<li>横铺图片，大概占全屏的1/5~1/4左右的图片，建议30K左右</li>
+<li>橱窗图，宽度1/4~1/2方图，8~15K</li>
+<li>加载占位图、loading动画 单色，质量调低，1.5K</li>
+<li>多个小图片，最好合成一张用css sprite布局，webview里的http请求很慢，能省则省</li>
+<li>什么时代了，一般的渐变 圆角样式能用css3就一定不能老土再用图片了！</li>
+<li>一些小图，可以base64成字符串，用css data:image保存（这个持保留意见，不直观，而且增加了css文件的体积，这种字串一般gzip压缩也不会变小多少）</li>
+</ul>
+<p><strong>（2）使用zepto.js代替jquery</strong> 或许你是javascript大牛建议一切用原生，但是简单的选择器和DOM操作肯定没有问题，何况手机上不用可以把大量IE兼容的代码直接忽略（暗爽）。但是真正做webapp，稍微复杂点还是需要使用一些插件，每个功能都用野生js重写，难度和稳健性先不说，代码也会越来越臃肿难以维护。（野生Javascript怎么也称不上优雅） 那么为什么强烈建议用zepto.js代替jquery呢，这可绝不仅仅因为gzip后差别20K的文件体积，而是因为Android Webview奇葩的js解析效率和更奇葩的onPageFinished事件，总之一旦用了jquery，页面的白屏loading肯定会多滚很多圈，宝贵的加载时间浪费在一个个用不到的函数对象的建立和兼容判断语句里了。 而用zepto.js可以有明显的改善，而且基本的选择器、DOM操作、ajax，写起来和jquery是完全一样的，无痛迁移，个别插件不兼容，往往也只需要把最后闭包外的(jQuery)改成($,window,document)就可以了。常用的插件一般也可以在github上找到zepto.js compatible version <strong>（3）先载入DOM，延时加载和执行js</strong> 奇怪，这不就是$(document).ready和window.onload的却别么？糊弄谁呢 但确实不是这么简单，主要原因就在于Android Webview的onPageFinished事件，Android端一般是用这个事件来标识页面加载完成并显示的，也就是说在此之前，会一直loading，但是 Android的OnPageFinished事件会在Javascript脚本执行完成之后才会触发。如果在页面中使用JQuery，会在处理完DOM对象，执行完$(document).ready(function() {});事件自会后才会渲染并显示页面。（参见 <a href="http://hi.baidu.com/goldchocobo/item/9f7b0639f3cd2efe96f88dfb" target="_blank" rel="noopener">http://hi.baidu.com/goldchocobo/item/9f7b0639f3cd2efe96f88dfb</a>）这篇文章。文中使用的lazyload.js已经有了版本更新，语法也发生了变化，这样用即可</p>
+<script src="js/lazyload.min.js"></script>
+<script>
+function loadComplete(){
+    //do something
+}
+
+//针对Android webview渲染js慢的问题，延时加载
+function loadscript(){
+        LazyLoad.js(\[
+         'js/zepto.min.js',
+         'js/jquery.lazyload.min.js',  
+         'js/mustache.js',
+         'js/flowtype.js'
+        \], loadComplete);
+}
+setTimeout(loadscript,10);
+</script>
+
+<p>这里的关键就是setTimeout(loadscript,10)，这个语句就是Webview里页面加载显示和载入和执行其它js和页面渲染事件的分水岭。把原来放在$(document).ready里面的主体程序放在loadComplete里面就行了。 经过测试，这个对包含复杂js的页面在webview中加载的提升最明显，如果你的页面一直在傻乎乎的loading loading loading.. 最好试一下这个办法。 不过我们的主体页面初始什么内容都没有，所有DOM都需要mustache根据api的配置，从模板中render，所以Android交了兵权之后还要在页面上空白或者显示自定义的loading图一小会，不过绝对比之前那种体验要明显快的多（大概15秒=&gt;5秒的样子）。 <strong>（4）图片懒加载</strong> 原因还是因为不在Provo，注意此lazyload非彼lazyload，这里是jquery.lazyload，小改动就可以支持zepto.js 这个插件很常见，最好还是去github主页<a href="https://github.com/tuupola/jquery_lazyload/" target="_blank" rel="noopener">https://github.com/tuupola/jquery_lazyload/</a>看用法，手机上调用的时候最好加上 threshold:300，否则滚动，由占位图加载的等待时间还是有点明显。 如果滚动加载失效（找不到原因），可以试试在lazyload之后加一条</p>
+<p>$(window).trigger(“scroll”);</p>
+<p>就可以了。另外lazyload占位图虽然小，但是最好能提前加载到缓存，这样页面显示的时候高度不会突变，把不同宽高比的占位图放在<body>不显示即可</body></p>
+<p><img src="upload/images/other/load_full.jpg" style="display:none;"><br><img src="upload/images/other/load_half.jpg" style="display:none;"></p>
+<p><strong>（5）使用LocalStorage缓存DOM</strong> 如果你的页面主体和我们这次一样，初始的DOM只有一个loading甚至空白，所有的内容都需要api获取接口数据，然后根据模板（比如mustache.js）render之后在append到DOM里的话，那么不管怎么优化，每次还都是需要等待那么一会儿，api请求接收和js模板引擎的处理在webview上都明显的慢。 而有些页面虽然需要后台配置，但并不是那么动态，像一个商城的首页这种，即使前端显示更新不那么即时，也不是很大的问题，刷新或者下次进入再显示最新版本也可以接受甚至是更好的用户体验。 我们这里把第一次mustache render好的html块，存入LocalStorage，然后下次进入页面的时候，先直接从LocalStorage中读取并显示，api读取和模板渲染后的新DOM再更新到LocaStorage中（如果有必要，可以在这个时候，比较下新旧是否相同，不同再更新一次DOM）</p>
+<p>function jq_lazyload(){<br>    $(“div#page_all img.lazy”).lazyload({threshold:300, load : function(e){$(this).next(‘b’).hide();$(this).removeClass(‘lazy’);}});<br>    $(window).trigger(“scroll”);<br>}</p>
+<p>function loadComplete(){<br>    //omit …</p>
+<pre><code>//如果用localstorage则先lazyload img
+if(window.localStorage){
+    if(localStorage.getItem(&apos;dom_all&apos;)){
+       jq_lazyload();
+    }
+}
+
+$.ajax({
+    url:server_url,
+    dataType:&quot;json&quot;,
+    type:&quot;GET&quot;,
+    success:function(json){
+        var dom_all=&quot;&quot;;
+        for(var i=0; i&lt;json.floors.length; i++){
+            var style_this = json.floors\[i\].style;
+            dom\_all+=Mustache.render($(&apos;#floor\_tpl_&apos;+style_this).html(), json.floors\[i\]);
+        }
+        if(!window.localStorage || !localStorage.getItem(&apos;dom_all&apos;)){
+           document.getElementById(&quot;page\_all&quot;).innerHTML = dom\_all; 
+           jq_lazyload();
+        }
+        localStorage.setItem(&apos;dom\_all&apos;,encodeURIComponent(dom\_all));
+        dom_all=null; //释放内存
+    }
+</code></pre><p>   });<br>}</p>
+<p>function loadscript(){<br>    if(window.localStorage){<br>        if(localStorage.getItem(‘dom_all’)){<br>            document.getElementById(“page_all”).innerHTML = decodeURIComponent(localStorage.getItem(‘dom_all’));<br>        }<br>    }<br>    LazyLoad.js([<br>        ‘js/zepto.min.js’,<br>        ‘js/jquery.lazyload.min.js’,<br>        ‘js/mustache.js’,<br>        ‘js/flowtype.js’<br>    ], loadComplete);<br>}<br>setTimeout(loadscript,10);</p>
+<p>//处理Webview未lazyload完，进入其它页面，js中止，返回不执行<br>window.ontouchstart = function(e){<br>    jq_lazyload();<br>}</p>
+<p><strong>（6）Webview的设置</strong> webview本身的设置也很重要，特别是cache和localStorage是否开始，是否app退出再进入就不存在了，各自空间有多大，这些需要和Android开发的同事沟通好，说不定就是一行参数设置，体验就大不同</p>
+<ul>
+<li><strong>Cache开启和设置</strong></li>
+</ul>
+<p>//下面3个是跟浏览器缓存Cache相关的，一个页面的 图片\js\css 载入过之后 //在服务器设置的文件有效期内，每次请求，会去服务器检查文件最后修改时间，如果一致，不会重新下载，而是使用缓存</p>
+<p>browser.getSettings().setAppCacheEnabled(true);<br>browser.getSettings().setAppCachePath(“/data/data/[com.packagename]/cache”);<br>browser.getSettings().setAppCacheMaxSize(5*1024*1024); // 5MB</p>
+<ul>
+<li><strong>LocalStorage相关设置</strong></li>
+</ul>
+<p>//下面是跟浏览的LocalStorage有关的，像首页的DOM，第一次载入，需要从服务器ajax请求接口json配置数据，然后用js从模板中渲染拼接成DOM，显示在页面中 //由于Android　webview的JS处理很慢，这里把第一次渲染后的DOM存入LocalStorage中，以后打开页面不用请求API和JS渲染，优先加载页面，和Cache配置，速度会快很多 //但是Android　webview的LocalStorage有个问题，关闭APP或者重启后，就清楚了，所以需要下面browser.getSettings().setDatabase相关的操作，把LocalStoarge存到DB中</p>
+<p>browser.getSettings().setDatabaseEnabled(true);<br>browser.getSettings().setDomStorageEnabled(true);<br>String databasePath = browser.getContext().getDir(“databases”, Context.MODE_PRIVATE).getPath();<br>browser.getSettings().setDatabasePath(databasePath);</p>
+<p>myWebView.setWebChromeClient(new WebChromeClient(){<br>　　　 @Override<br>　　　 public void onExceededDatabaseQuota(String url, String databaseIdentifier, long currentQuota, long estimatedSize, long totalUsedQuota, WebStorage.QuotaUpdater quotaUpdater)<br>　　　 {<br>　　　　　　　 quotaUpdater.updateQuota(estimatedSize * 2);<br>　　　 }<br>}</p>
+<ul>
+<li><strong>浏览器自带缩放按钮取消显示</strong></li>
+</ul>
+<p>//这个是跟浏览器的页面缩放相关，不用显示浏览器的放大缩小按钮，这个一般在最下面出现，体验不好</p>
+<p>browser.getSettings().setBuiltInZoomControls(false);</p>
+<p><strong>（7）服务器端设置 gzip etag Cache-Control</strong> gzip就不说了，总之一定要开启html css js json的gzip压缩！！！ 为了弄明白这个，非科班出身的我连着fiddler边调测边翻了小半本&lt;计算机网络&gt;的书，其实也还没完全弄明白。而且测试发现现在的浏览器特别是桌面的360(#Anti-360#)和一些国产手机浏览器，为了制造“极速”的假象，缓存处理很多地方都没有按照规范来，动不动就会过度缓存，导致页面不能及时更新。Android Webview的LOAD_CACHE_ELSE_NETWORK设置更是完全无视etag、expire time这些，强制使用缓存。 总之，这块还没完全弄明白，等后面彻底明白了再结合fiddler和apache总结下吧。给出我这边apache .htaccess相关配置</p>
+<ifmodule mod_deflate.c=""><br>AddOutputFilter DEFLATE html xml php js css json<br></ifmodule>
+
+<ifmodule mod_headers.c=""><br>    <filesmatch "\\\.(ico|jpe?g|bmp|png|gif|swf|css|js|json)$"=""><br>        Header set Cache-Control “max-age=2692000, public”<br>    </filesmatch><br>    <filesmatch "\\\.(php|html)$"=""><br>        Header set Cache-Control “max-age=60, private, must-revalidate”<br>    </filesmatch><br>    Header unset ETag<br></ifmodule>
+
+<p><strong>（8）以上都不是</strong> 其实Hybrid App的最佳实践，还是应该把所有的html css js和主要的图片资源离线存储在Android的asset文件夹下，然后由Android实现从服务器端到手机的这个www主文件夹的更新机制，这样才不用凡事从server端下载(很多人讨论webapp时只大谈特谈性能，其实一切需要加载的实现方式才是最大的“阻塞”)。这样也可以随心所欲的使用一些Sencha Touch或AngularJS+UI这样的中型和重型框架，可惜上面提到的文件更新机制没有建立，暂时还没有机会实践这种模式。这种想法的文章不多，参考<a href="http://developer.appcelerator.com/question/146564/update-apps-local-html-webviewed-files" target="_blank" rel="noopener">http://developer.appcelerator.com/question/146564/update-apps-local-html-webviewed-files</a>的reply部分 就到这里吧… <strong>本文地址：<a href="http://awebird.com/blog/art/122" target="_blank" rel="noopener">http://awebird.com/blog/art/122/</a></strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2013/08/27/e5-9f-ba-e4-ba-8eandroid-webview-e7-9a-84hyper-app-e5-bc-80-e5-8f-91-e7-9a-84-e5-89-8d-e7-ab-af-e4-bc-98-e5-8c-96/" data-id="cjhx2lcym000ppvpcbh1c9aw3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hybrid-app/">hybrid app</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webview/">webview</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2013/09/11/e4-bd-bf-e7-94-a8fiddler-e8-b0-83-e8-af-95native-e5-92-8chybrid-app/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          使用fiddler调试Native和Hybrid App
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2013/08/20/e4-bd-bf-e7-94-a8fiddler-e5-b0-86-e7-bd-91-e7-ab-99-e4-b8-8a-e7-9a-84css-js-e9-87-8d-e5-ae-9a-e5-90-91-e8-87-b3-e6-9c-ac-e5-9c-b0-e6-96-87-e4-bb-b6-ef-bc-8c-e8-bf-9b-e8-a1-8c-e5-9c-a8-e7-ba-bf/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">使用fiddler将网站上的css js重定向至本地文件，进行在线调试</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/">技术</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/163邮箱/">163邮箱</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/400/">400</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActionScript/">ActionScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CORS/">CORS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flash/">Flash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GMS服务包/">GMS服务包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Geolocation/">Geolocation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IP定位/">IP定位</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSONP/">JSONP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularjs/">angularjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/assets/">assets</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/curl/">curl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fiddler/">fiddler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/google/">google</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hashtag/">hashtag</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hosts/">hosts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd-conf/">httpd.conf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hybrid-app/">hybrid app</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iscroll/">iscroll</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery/">jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/native-app/">native app</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/optimization/">optimization</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/overflow-hidden/">overflow:hidden</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/qq互联/">qq互联</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/qq登录/">qq登录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/showlog/">showlog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stackoverflow/">stackoverflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/subversion/">subversion</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svn/">svn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svnsync/">svnsync</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ui-router/">ui-router</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webapp/">webapp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webview/">webview</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/买房/">买房</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/优化/">优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/国行/">国行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/地图API/">地图API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/婚纱照/">婚纱照</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信/">微信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/换工作/">换工作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志/">日志</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/未婚先胖/">未婚先胖</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/本机/">本机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/毕业设计/">毕业设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活/">生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/电子技术实验/">电子技术实验</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/百度/">百度</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/结婚/">结婚</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/虚拟实验/">虚拟实验</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试/">调试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试，前端/">调试，前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/谷歌/">谷歌</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/通信录/">通信录</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/163邮箱/" style="font-size: 10px;">163邮箱</a> <a href="/tags/400/" style="font-size: 10px;">400</a> <a href="/tags/ActionScript/" style="font-size: 10px;">ActionScript</a> <a href="/tags/Android/" style="font-size: 16.67px;">Android</a> <a href="/tags/CORS/" style="font-size: 10px;">CORS</a> <a href="/tags/Flash/" style="font-size: 10px;">Flash</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/GMS服务包/" style="font-size: 10px;">GMS服务包</a> <a href="/tags/Geolocation/" style="font-size: 10px;">Geolocation</a> <a href="/tags/HTML5/" style="font-size: 13.33px;">HTML5</a> <a href="/tags/IP定位/" style="font-size: 10px;">IP定位</a> <a href="/tags/JSONP/" style="font-size: 10px;">JSONP</a> <a href="/tags/PHP/" style="font-size: 13.33px;">PHP</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/assets/" style="font-size: 10px;">assets</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/curl/" style="font-size: 10px;">curl</a> <a href="/tags/fiddler/" style="font-size: 13.33px;">fiddler</a> <a href="/tags/google/" style="font-size: 10px;">google</a> <a href="/tags/hashtag/" style="font-size: 10px;">hashtag</a> <a href="/tags/hosts/" style="font-size: 10px;">hosts</a> <a href="/tags/httpd-conf/" style="font-size: 10px;">httpd.conf</a> <a href="/tags/hybrid-app/" style="font-size: 16.67px;">hybrid app</a> <a href="/tags/iscroll/" style="font-size: 10px;">iscroll</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/native-app/" style="font-size: 10px;">native app</a> <a href="/tags/optimization/" style="font-size: 10px;">optimization</a> <a href="/tags/overflow-hidden/" style="font-size: 10px;">overflow:hidden</a> <a href="/tags/qq互联/" style="font-size: 10px;">qq互联</a> <a href="/tags/qq登录/" style="font-size: 10px;">qq登录</a> <a href="/tags/showlog/" style="font-size: 10px;">showlog</a> <a href="/tags/stackoverflow/" style="font-size: 10px;">stackoverflow</a> <a href="/tags/subversion/" style="font-size: 10px;">subversion</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/svnsync/" style="font-size: 10px;">svnsync</a> <a href="/tags/ui-router/" style="font-size: 10px;">ui-router</a> <a href="/tags/webapp/" style="font-size: 10px;">webapp</a> <a href="/tags/webview/" style="font-size: 13.33px;">webview</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/买房/" style="font-size: 10px;">买房</a> <a href="/tags/优化/" style="font-size: 10px;">优化</a> <a href="/tags/前端/" style="font-size: 13.33px;">前端</a> <a href="/tags/国行/" style="font-size: 10px;">国行</a> <a href="/tags/地图API/" style="font-size: 10px;">地图API</a> <a href="/tags/婚纱照/" style="font-size: 10px;">婚纱照</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/换工作/" style="font-size: 10px;">换工作</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/未婚先胖/" style="font-size: 10px;">未婚先胖</a> <a href="/tags/本机/" style="font-size: 10px;">本机</a> <a href="/tags/毕业设计/" style="font-size: 10px;">毕业设计</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/生活/" style="font-size: 13.33px;">生活</a> <a href="/tags/电子技术实验/" style="font-size: 10px;">电子技术实验</a> <a href="/tags/百度/" style="font-size: 10px;">百度</a> <a href="/tags/结婚/" style="font-size: 10px;">结婚</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/虚拟实验/" style="font-size: 10px;">虚拟实验</a> <a href="/tags/调试/" style="font-size: 10px;">调试</a> <a href="/tags/调试，前端/" style="font-size: 10px;">调试，前端</a> <a href="/tags/谷歌/" style="font-size: 10px;">谷歌</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/通信录/" style="font-size: 10px;">通信录</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/12/31/2014-e5-b9-b4-e7-bb-88-e5-b0-8f-e7-bb-93/">2014年终小结</a>
+          </li>
+        
+          <li>
+            <a href="/2014/05/29/e5-b7-b2-e6-98-8f/">未婚先胖...</a>
+          </li>
+        
+          <li>
+            <a href="/2013/12/08/e5-9c-a8android-webview-e7-9a-84assets-e7-9b-ae-e5-bd-95-e4-b8-8b-e5-bc-80-e5-8f-91hybrid-app-e7-9a-84-e4-b8-80-e4-ba-9b-e5-9d-91/">在Android Webview的assets目录下开发Hybrid App的一些坑…</a>
+          </li>
+        
+          <li>
+            <a href="/2013/09/11/e4-bd-bf-e7-94-a8fiddler-e8-b0-83-e8-af-95native-e5-92-8chybrid-app/">使用fiddler调试Native和Hybrid App</a>
+          </li>
+        
+          <li>
+            <a href="/2013/08/27/e5-9f-ba-e4-ba-8eandroid-webview-e7-9a-84hyper-app-e5-bc-80-e5-8f-91-e7-9a-84-e5-89-8d-e7-ab-af-e4-bc-98-e5-8c-96/">基于Android Webview的Hybrid App开发的前端优化</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

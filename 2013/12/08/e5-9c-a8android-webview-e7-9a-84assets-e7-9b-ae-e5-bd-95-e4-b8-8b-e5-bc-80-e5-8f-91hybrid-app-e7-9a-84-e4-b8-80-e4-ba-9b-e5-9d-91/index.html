@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>在Android Webview的assets目录下开发Hybrid App的一些坑… | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="好久没写blog了，忙起来真是没法.. 在上一篇文章《基于Android Webview的Hybrid App开发的前端优化》的最后一条“以上都不是”里提到了“其实Hybrid App的最佳实践，还是应该把所有的html css js和主要的图片资源离线存储在Android的asset文件夹下，然后由Android实现从服务器端到手机的这个www主文件夹的更新机制，这样才不用凡事从server端">
+<meta name="keywords" content="javascript,hybrid app,Android,angularjs,assets,hashtag,HTML5,iscroll,overflow:hidden,ui-router,webapp,webview">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在Android Webview的assets目录下开发Hybrid App的一些坑…">
+<meta property="og:url" content="http://yoursite.com/2013/12/08/e5-9c-a8android-webview-e7-9a-84assets-e7-9b-ae-e5-bd-95-e4-b8-8b-e5-bc-80-e5-8f-91hybrid-app-e7-9a-84-e4-b8-80-e4-ba-9b-e5-9d-91/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="好久没写blog了，忙起来真是没法.. 在上一篇文章《基于Android Webview的Hybrid App开发的前端优化》的最后一条“以上都不是”里提到了“其实Hybrid App的最佳实践，还是应该把所有的html css js和主要的图片资源离线存储在Android的asset文件夹下，然后由Android实现从服务器端到手机的这个www主文件夹的更新机制，这样才不用凡事从server端">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://awebird.com/blog/wp-content/uploads/2013/12/crying_android_thumb.jpg">
+<meta property="og:image" content="http://awebird.com/blog/wp-content/uploads/2013/12/1_thumb.jpg">
+<meta property="og:updated_time" content="2018-06-02T07:21:53.106Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在Android Webview的assets目录下开发Hybrid App的一些坑…">
+<meta name="twitter:description" content="好久没写blog了，忙起来真是没法.. 在上一篇文章《基于Android Webview的Hybrid App开发的前端优化》的最后一条“以上都不是”里提到了“其实Hybrid App的最佳实践，还是应该把所有的html css js和主要的图片资源离线存储在Android的asset文件夹下，然后由Android实现从服务器端到手机的这个www主文件夹的更新机制，这样才不用凡事从server端">
+<meta name="twitter:image" content="http://awebird.com/blog/wp-content/uploads/2013/12/crying_android_thumb.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-e5-9c-a8android-webview-e7-9a-84assets-e7-9b-ae-e5-bd-95-e4-b8-8b-e5-bc-80-e5-8f-91hybrid-app-e7-9a-84-e4-b8-80-e4-ba-9b-e5-9d-91" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/12/08/e5-9c-a8android-webview-e7-9a-84assets-e7-9b-ae-e5-bd-95-e4-b8-8b-e5-bc-80-e5-8f-91hybrid-app-e7-9a-84-e4-b8-80-e4-ba-9b-e5-9d-91/" class="article-date">
+  <time datetime="2013-12-08T08:01:22.000Z" itemprop="datePublished">2013-12-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      在Android Webview的assets目录下开发Hybrid App的一些坑…
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://awebird.com/blog/wp-content/uploads/2013/12/crying_android.jpg" target="_blank" rel="noopener"><img src="http://awebird.com/blog/wp-content/uploads/2013/12/crying_android_thumb.jpg" alt="crying_android" title="crying_android"></a> 好久没写blog了，忙起来真是没法.. 在上一篇文章<a href="http://awebird.com/blog/art/122" target="_blank" rel="noopener">《基于Android Webview的Hybrid App开发的前端优化》</a>的最后一条“<em>以上都不是</em>”里提到了“<em>其实Hybrid App的最佳实践，还是应该把所有的html css js和主要的图片资源离线存储在Android的asset文件夹下，然后由Android实现从服务器端到手机的这个www主文件夹的更新机制，这样才不用凡事从server端下载..</em>”没想到这么快就应用到新的项目中了。 当然，还只是实现了将webapp放在Android app的assets下，通过json api与server交互这步，理想中的通过app文件操作的更新机制还没有做，但是已经是梦想照进现实的节奏。感谢Android开发的同事包容了我这边不厌其烦反反复复的修改调试，才让这个相对Cutting Edge的方法得以应用到产品中。原本使用Hybrid App的初衷是为了分担Android开发同事的一些工作，但由于实践经验不足，而且Android webview确实还存在一些bug和兼容问题，最后评估下来反而多耗了不少时间精力。因此我们对于Hybrid App方式的使用暂时告一段落，web侧工作重心回归数据和后台开发，但是这轮开发的经验和教训还是很宝贵的，也给了我们更多信心，相信再过一小段时间，HTML5在移动设备的大规模应用就会到来。 好的，梦醒了还是总结下在Android Webview的assets目录下开发Hybrid App的一些坑，和各种跳过或者踩过坑的方案吧。 <strong>【坑 #1】 部分Android 4.0设备（HTC、海尔等）LoadUrl不能识别？参数或#hashtag</strong> 项目开始的时候，web部分是单独开发的，为了以后加入更多模块的扩展考虑，这个项目采用了AngularJs MVVM前端框架和ui-router做页面路由，其实就是单页应用（SPA）。当然，web程序无论采用什么技术，传参数只有两种方式 (1) ?参数形式，如top.html?id=1 (2) #hashtag形式，如index.html#topic/1 如果把程序部署在server端，或者Android的assets目录下，使用Webview访问的方式为</p>
+<p>mWebView =(WebView)findViewById(R.id.mb_webview);<br>// String url_server = “<a href="http://www.awebird.com/demo\_project/index.html#demo/123&quot;" target="_blank" rel="noopener">http://www.awebird.com/demo\_project/index.html#demo/123&quot;</a>;<br>String url_assets = “file:///android_asset/www/demo_project/index.html#demo/123”;<br>mWebView.loadUrl(url_assets);</p>
+<p>我们之前的项目已经大量使用了第一种url_server的方式进行开发，webview loadUrl远程链接也从没有出过问题，所以就顺理成章的开发着，但是等web端做的差不多了，部署到Android工程的assets目录下测试时，遇到一个非常棘手的问题，有一台HTC Android 4.0.3的测试机总是无法打开网页（Page not found） <a href="http://awebird.com/blog/wp-content/uploads/2013/12/1.jpg" target="_blank" rel="noopener"><img src="http://awebird.com/blog/wp-content/uploads/2013/12/1_thumb.jpg" alt="1" title="1"></a> 由于Android开发侧的同事不懂Web，我这边对Android的了解也是汗毛级别，所以遇到这种问题的纠结与困惑就不赘述，直接给出“坑#1_desc” <strong>Android的issue 17535 (</strong>Issue <a href="https://code.google.com/p/android/issues/detail?id=17535" target="_blank" rel="noopener">17535</a>: WebView - URL mechanism is broken - passing parameters does not work<strong>)</strong> <a href="https://code.google.com/p/android/issues/detail?id=17535" target="_blank" rel="noopener">https://code.google.com/p/android/issues/detail?id=17535</a> 打开这个页面，一阵惊叹，反正我是第一次在google groups或者stackoverflow上看到这么多老外对一个bug如此大面积的愤怒情绪爆发，这个密集程度快赶上国内门户网站中国足球新闻下的评论了Orz.. 具体bug不细描述，其实就是Android 3.0以后的webview在访问assets目录下的本地html资源时，带？参数和#hashtag的URL机制不能被识别，上面链接（#148楼）里2012年6月29号有google的开发人员回帖说这个问题已经在Jelly Bean被修复，当然这个只是Android代码的修复，所以现在市面上还是有很多手机的Android版本依然存在这个问题，就像我们不能强迫用户都改用Chrome，不能强迫国行Android用户root手机安装GMS服务包一样，我们也没办法让“找不到网页”的用户换手机或者升级系统，所以问题还是要被解决，下面提供三种方案，我们使用了最后一种 <strong>（1）从Android侧扩展webview类进行处理</strong> 相关的方案和jar包已经在下面的链接列出 Step1~6即可解决。由于要对项目java部分进行改动，所以我们这边app侧没有采纳次方案，但应该是可行的。多提一句，我这边测试过，Phonegap的开源版本Apache Cordova就已经修复了这个问题 <a href="http://bricolsoftconsulting.com/fixing-the-broken-honeycomb-and-ics-webview/" target="_blank" rel="noopener">http://bricolsoftconsulting.com/fixing-the-broken-honeycomb-and-ics-webview/</a> <a href="https://github.com/bricolsoftconsulting/WebViewIssue17535Fix" target="_blank" rel="noopener">https://github.com/bricolsoftconsulting/WebViewIssue17535Fix</a> <strong>（2）loadUrl(‘index.html’)后，再loadUrl一句js跳转语句的方法</strong> 这个方法，是得到V2EX的<strong>Archangel_SDY</strong>童鞋提醒，就是先只载入不带参数的页面(可以显示空白页或者loading效果)，在页面载入后(onPageFinished)，在loadUrl一句javascript用于跳转页面，下面的locationTo是在index.html写好的js函数，具体内容可以自己控制，只要接收到参数就ok Android侧 （onKeyDown和java interface是用于处理返回事件问题的）</p>
+<p>mWebView = (WebView)findViewById(R.id.mb_webview);<br>String base_url = file:///android_asset/www/demo_project/index.html;<br>mWebView.setWebViewClient(new WebViewClient() {<br>    @Override<br>    public void onPageFinished(WebView view, String url) {<br>        mWebView.loadUrl(“javascript:locationTo(#demo/“+”123”+”‘)”);<br>        super.onPageFinished(view, url);<br>    }<br>}<br>mWebView.loadUrl(base_url);</p>
+<p>@Override<br>public boolean onKeyDown(int keyCode, KeyEvent event){<br>        if(keyCode == KeyEvent.KEYCODE_BACK) {<br>            //点击返回键时<br>            if(mWebView.canGoBack()){<br>                   mWebView.goBack();// 返回前一个页面<br>            }else{<br>                    finish();<br>            }<br>            return true;<br>        }<br>    return super.onKeyDown(keyCode, event);<br>}</p>
+<p>//Javascript Interface<br>public class demo_java_interface{<br>        /**<br>         * 关闭当前页面<br>         */<br>        public void closeCurrectActivity(){<br>            finish();<br>        }<br>}</p>
+<p>Web侧index.html中js (sessionStorge和javascript Interface调用代码是处理手机返回键事件用的)</p>
+<script>
+function locationTo(data_path){
+  if(!sessionStorage.getItem("once")){
+    sessionStorage.setItem("once", "1");
+      location.href=data_path;
+    }else{
+      //call demo\_java\_interface.goback()..
+      if(window.demo\_java\_interface){
+        window.demo\_java\_interface.closeCurrectActivity();
+    }else{
+        console.log('call java to closeCurrentActivity');
+    }
+  }
+}
+</script>
+
+<p>当然，由于我手上没有这个问题的测试机（Android开发在不同城市Orzzzz），其实也不能确认这个方法是否真正有效，因为插入了一个中间页面，所以带来了返回和跳转问题，我们很快放弃了这个方案，继续寻找其它方法 <strong>（3）重写onReceivedError()方法 #最终采纳并测试有效版本#</strong> 参见 <a href="http://stackoverflow.com/questions/6542702/basic-internal-links-dont-work-in-honeycomb-app/7297536#7297536" target="_blank" rel="noopener">http://stackoverflow.com/questions/6542702/basic-internal-links-dont-work-in-honeycomb-app/7297536#7297536</a> 代码（只支持#hashtag）</p>
+<p>mWebView = (WebView)findViewById(R.id.mb_webview);</p>
+<p>String url = file:///android_asset/www/demo_project/index.html#demo/123;</p>
+<p>@Override<br>public void onReceivedError(WebView view, int errorCode, String description, String failingUrl)<br>{<br>    if (failingUrl.contains(“#”)) {<br>      String[] temp;<br>      temp = failingUrl.split(“#”);<br>      mWebView.loadUrl(temp[0]);<br>       try {<br>        Thread.sleep(400);<br>      } catch (InterruptedException e) {<br>         e.printStackTrace();<br>      }<br>       mWebView.loadUrl(failingUrl);<br>     }<br>}</p>
+<p>mWebView.loadUrl(url);</p>
+<p><strong>**【坑 #2】</strong>所有Android Webview不能捕获#hashtag变化<strong> Hybrid App中Android侧经常需要捕获webview中的url变化来做一些响应（比如改变header title的文字，处理终端的返回键等等） 但是无论是Server端的Url还是assets中的Url，webview都无法捕获到#hashtag的变化，也就是说index.html#step1 –&gt; index.html#step2 –&gt; index.html#step3 … 这些页面跳转是不能被Android监控到的。 这里提供两个解决方案 </strong>（1）在webapp里面使用javascript window.onhashchange里面调用Android的Javascript Interface方法，通知Android hash变化<strong> <a href="http://stackoverflow.com/questions/15176519/android-webview-is-it-possible-to-detect-url-hash-change" target="_blank" rel="noopener">http://stackoverflow.com/questions/15176519/android-webview-is-it-possible-to-detect-url-hash-change</a> </strong>（2）自己在页面跳转逻辑里，根据需要调用Android的Javascript Interface方法实现需要的功能** 比如我这边用Angularjs，就在每个url对应的controller里面，调用Android侧的Javascript Interface方法，后来极端一点，由于不同页面功能点差别较大，直接废弃了web侧的ui-router功能，所有的跳转都交给java处理，也就是每个web页面（包括SPA中的一个状态）都交给Android的一个单独Activity，也就是做Activity的条状，Web侧的router白白浪费了T-T 其实上面的（1）和（2）是同一种方法，Android的Java和Webview里的web交互只有两种办法，一个是url捕获，一个是Javascript Interface，这里在#hashtag不能被url捕获到的情况下，就只能使用Javascript Interface了。 这样处理的一个结果就是Hybrid app里的web部分加入的java接口调用，如果脱离了App环境，要单独处理，或者通过检测Javascript Interface对象是否存在，来决定是采用web方法还是app方法跳转</p>
+<p>$rootScope.Java_go2step2 = function){<br>     if(window.demo_java_interface_obj){<br>        //如果java interface对象存在，调用Java方法跳转Activity<br>        window.demo_java_interface_obj.go2step2);<br>    }else{<br>        //否则，使用web跳转<br>        $state.go(‘step2’);<br>     }<br> }</p>
+<p>总之，不完美…   <strong>【坑 #3】Android 2.X Webview不能Scroll滑动</strong> 发现有HTML5的页面在Android 4.x下一切正常，在Android 2.X下不能滑动（Scroll）的问题 这个问题无疑是Android的 bug 目前有两个解决方案 <strong>（1）Html中去掉meta viewport tag (未经验证)</strong></p>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+<p><a href="http://stackoverflow.com/questions/10552702/cant-scroll-webview-in-android" target="_blank" rel="noopener">http://stackoverflow.com/questions/10552702/cant-scroll-webview-in-android</a> 由于viewport对于移动端的页面适配很重要，前端的同学说不能去掉，试过去掉后样式乱掉了，所以没有采用此方案 <strong>（2）Android中的layout布局，将webview布局在ScrollView中</strong></p>
+<scrollview android:id="@+id/scrollView1" android:layout\_width="fill\_parent" android:layout\_height="wrap\_content" android:layout_above="@+id/tab" android:layout_alignparenttop="true" android:background="#00000000" android:scrollbars="none"><br>            <linearlayout android:layout\_width="fill\_parent" android:layout\_height="fill\_parent" android:background="#00000000" android:orientation="vertical"><br>                <webview android:id="@+id/mb_webview" android:layout\_width="fill\_parent" android:layout\_height="wrap\_content"><br>            </webview></linearlayout><br></scrollview>
+
+<p>这是Android侧的方案，上面的布局xml只是一个简单demo，web童鞋遇到了可以跟app开发的童鞋沟通解决。我们采用的是此方案 【—–Scroll问题后续——】 后续开发过程中，Android的同事说不能使用上面的ScrollView布局，因为了整体的布局架构有冲突，所以这个问题再次无解，下面是后ScrollView时代的血泪史 <strong>（1）采用iScroll</strong> angulrjs可以使用<a href="https://github.com/ibspoof/ng-iScroll‎" target="_blank" rel="noopener">ng-iscroll</a> iscroll可以让webapp乍一看很有原生的感觉，但是我个人认为在webview存在不少问题，而且体验也不够顺畅，除非下拉刷新获取更多数据这种场景，应该尽量不用 使用iscroll后测试确实可以在Android 2.3的手机上Scroll，但是有个问题，是因为我们的页面是先载入，在动态$http.post获取数据，更新页面内容的，所以Scroll的范围特别是高度总是会出现可以滑动到最底部，但是又弹回上面的问题.. 后来分析是isroll的区域判断了初始页面的位置，所以在$http.post的数据获取后，$timeout延时refresh myscroll 上面的方案貌似解决了，但是在webview下又出现了页面闪烁的现象，而且scroll的体验很不好 （2）最后痛定思痛，还是删除了所有的iscroll部分，重新寻找原因，重要发现元凶</p>
+<p>overflow:hidden</p>
+<p>是他，是他，就是他！ [原因] Android 2.X不支持这句css <strong>[解决方案] 去掉，加上 height:auto</strong> [参考] <a href="http://www.seabreezecomputers.com/tips/scroll-div.htm" target="_blank" rel="noopener">Scrollable DIV on mobile phones</a> <strong>【还在坑里没爬出来的总结…】</strong> 通过这个Hybrid App项目的实践，我们遇到了不少麻烦，HTML5在移动端的应用已经基本成熟，但是还有一些问题，让我们再耐心一点，做好准备，等Android特别是webview再成熟一点，等手机终端再快一点，等大家发了压岁钱、年终奖都换了新手机… 很多问题就自愈了（同时一大波新问题随之到来）LOL <strong>本文地址：<a href="http://awebird.com/blog/art/190" target="_blank" rel="noopener">http://awebird.com/blog/art/190/</a></strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2013/12/08/e5-9c-a8android-webview-e7-9a-84assets-e7-9b-ae-e5-bd-95-e4-b8-8b-e5-bc-80-e5-8f-91hybrid-app-e7-9a-84-e4-b8-80-e4-ba-9b-e5-9d-91/" data-id="cjhx2lcyh000kpvpcdq5zdy4u" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML5/">HTML5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angularjs/">angularjs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/assets/">assets</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hashtag/">hashtag</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hybrid-app/">hybrid app</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iscroll/">iscroll</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/overflow-hidden/">overflow:hidden</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ui-router/">ui-router</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webapp/">webapp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webview/">webview</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/05/29/e5-b7-b2-e6-98-8f/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          未婚先胖...
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2013/09/11/e4-bd-bf-e7-94-a8fiddler-e8-b0-83-e8-af-95native-e5-92-8chybrid-app/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">使用fiddler调试Native和Hybrid App</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/">技术</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/163邮箱/">163邮箱</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/400/">400</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActionScript/">ActionScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CORS/">CORS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flash/">Flash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GMS服务包/">GMS服务包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Geolocation/">Geolocation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IP定位/">IP定位</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSONP/">JSONP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularjs/">angularjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/assets/">assets</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/curl/">curl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fiddler/">fiddler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/google/">google</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hashtag/">hashtag</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hosts/">hosts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd-conf/">httpd.conf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hybrid-app/">hybrid app</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iscroll/">iscroll</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery/">jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/native-app/">native app</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/optimization/">optimization</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/overflow-hidden/">overflow:hidden</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/qq互联/">qq互联</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/qq登录/">qq登录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/showlog/">showlog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stackoverflow/">stackoverflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/subversion/">subversion</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svn/">svn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svnsync/">svnsync</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ui-router/">ui-router</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webapp/">webapp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webview/">webview</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/买房/">买房</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/优化/">优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/国行/">国行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/地图API/">地图API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/婚纱照/">婚纱照</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信/">微信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/换工作/">换工作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志/">日志</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/未婚先胖/">未婚先胖</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/本机/">本机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/毕业设计/">毕业设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活/">生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/电子技术实验/">电子技术实验</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/百度/">百度</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/结婚/">结婚</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/虚拟实验/">虚拟实验</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试/">调试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试，前端/">调试，前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/谷歌/">谷歌</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/通信录/">通信录</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/163邮箱/" style="font-size: 10px;">163邮箱</a> <a href="/tags/400/" style="font-size: 10px;">400</a> <a href="/tags/ActionScript/" style="font-size: 10px;">ActionScript</a> <a href="/tags/Android/" style="font-size: 16.67px;">Android</a> <a href="/tags/CORS/" style="font-size: 10px;">CORS</a> <a href="/tags/Flash/" style="font-size: 10px;">Flash</a> <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/GMS服务包/" style="font-size: 10px;">GMS服务包</a> <a href="/tags/Geolocation/" style="font-size: 10px;">Geolocation</a> <a href="/tags/HTML5/" style="font-size: 13.33px;">HTML5</a> <a href="/tags/IP定位/" style="font-size: 10px;">IP定位</a> <a href="/tags/JSONP/" style="font-size: 10px;">JSONP</a> <a href="/tags/PHP/" style="font-size: 13.33px;">PHP</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/assets/" style="font-size: 10px;">assets</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/curl/" style="font-size: 10px;">curl</a> <a href="/tags/fiddler/" style="font-size: 13.33px;">fiddler</a> <a href="/tags/google/" style="font-size: 10px;">google</a> <a href="/tags/hashtag/" style="font-size: 10px;">hashtag</a> <a href="/tags/hosts/" style="font-size: 10px;">hosts</a> <a href="/tags/httpd-conf/" style="font-size: 10px;">httpd.conf</a> <a href="/tags/hybrid-app/" style="font-size: 16.67px;">hybrid app</a> <a href="/tags/iscroll/" style="font-size: 10px;">iscroll</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/native-app/" style="font-size: 10px;">native app</a> <a href="/tags/optimization/" style="font-size: 10px;">optimization</a> <a href="/tags/overflow-hidden/" style="font-size: 10px;">overflow:hidden</a> <a href="/tags/qq互联/" style="font-size: 10px;">qq互联</a> <a href="/tags/qq登录/" style="font-size: 10px;">qq登录</a> <a href="/tags/showlog/" style="font-size: 10px;">showlog</a> <a href="/tags/stackoverflow/" style="font-size: 10px;">stackoverflow</a> <a href="/tags/subversion/" style="font-size: 10px;">subversion</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/svnsync/" style="font-size: 10px;">svnsync</a> <a href="/tags/ui-router/" style="font-size: 10px;">ui-router</a> <a href="/tags/webapp/" style="font-size: 10px;">webapp</a> <a href="/tags/webview/" style="font-size: 13.33px;">webview</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/买房/" style="font-size: 10px;">买房</a> <a href="/tags/优化/" style="font-size: 10px;">优化</a> <a href="/tags/前端/" style="font-size: 13.33px;">前端</a> <a href="/tags/国行/" style="font-size: 10px;">国行</a> <a href="/tags/地图API/" style="font-size: 10px;">地图API</a> <a href="/tags/婚纱照/" style="font-size: 10px;">婚纱照</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/换工作/" style="font-size: 10px;">换工作</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/未婚先胖/" style="font-size: 10px;">未婚先胖</a> <a href="/tags/本机/" style="font-size: 10px;">本机</a> <a href="/tags/毕业设计/" style="font-size: 10px;">毕业设计</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/生活/" style="font-size: 13.33px;">生活</a> <a href="/tags/电子技术实验/" style="font-size: 10px;">电子技术实验</a> <a href="/tags/百度/" style="font-size: 10px;">百度</a> <a href="/tags/结婚/" style="font-size: 10px;">结婚</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/虚拟实验/" style="font-size: 10px;">虚拟实验</a> <a href="/tags/调试/" style="font-size: 10px;">调试</a> <a href="/tags/调试，前端/" style="font-size: 10px;">调试，前端</a> <a href="/tags/谷歌/" style="font-size: 10px;">谷歌</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/通信录/" style="font-size: 10px;">通信录</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/12/31/2014-e5-b9-b4-e7-bb-88-e5-b0-8f-e7-bb-93/">2014年终小结</a>
+          </li>
+        
+          <li>
+            <a href="/2014/05/29/e5-b7-b2-e6-98-8f/">未婚先胖...</a>
+          </li>
+        
+          <li>
+            <a href="/2013/12/08/e5-9c-a8android-webview-e7-9a-84assets-e7-9b-ae-e5-bd-95-e4-b8-8b-e5-bc-80-e5-8f-91hybrid-app-e7-9a-84-e4-b8-80-e4-ba-9b-e5-9d-91/">在Android Webview的assets目录下开发Hybrid App的一些坑…</a>
+          </li>
+        
+          <li>
+            <a href="/2013/09/11/e4-bd-bf-e7-94-a8fiddler-e8-b0-83-e8-af-95native-e5-92-8chybrid-app/">使用fiddler调试Native和Hybrid App</a>
+          </li>
+        
+          <li>
+            <a href="/2013/08/27/e5-9f-ba-e4-ba-8eandroid-webview-e7-9a-84hyper-app-e5-bc-80-e5-8f-91-e7-9a-84-e5-89-8d-e7-ab-af-e4-bc-98-e5-8c-96/">基于Android Webview的Hybrid App开发的前端优化</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
