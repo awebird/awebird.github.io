@@ -5,14 +5,14 @@
   
 
   
-  <title>使用svnsync在windows下同步svn版本库来“极速”showlog | Hexo</title>
+  <title>使用svnsync在windows下同步svn版本库来“极速”showlog | aWeBird</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="虽然相比如日中天的git来说早已是明日黄花，但由于历史或团队的原因，svn还是目前应用最广泛的版本控制管理工具。随着日积月累的修修改改，我们会越来越倚重于svn的showlog功能来查看某一段代码的修改记录，但是svn的所有历史版本和这些修改记录都存在服务器上，client端只有一个最新update的版本，这样如果处于离线状态或server在内网，还有像我们现在这样开发团队在不同的城市的话，那么">
 <meta name="keywords" content="showlog,subversion,svn,svnsync,windows,日志">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用svnsync在windows下同步svn版本库来“极速”showlog">
-<meta property="og:url" content="http://yoursite.com/2013/07/14/e4-bd-bf-e7-94-a8subversion-e7-9a-84svnsync-e5-9c-a8windows-e4-b8-8b-e5-90-8c-e6-ad-a5svn-e7-89-88-e6-9c-ac-e5-ba-93-e6-9d-a5showlog/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:url" content="http://awebird.com/2013/07/14/e4-bd-bf-e7-94-a8subversion-e7-9a-84svnsync-e5-9c-a8windows-e4-b8-8b-e5-90-8c-e6-ad-a5svn-e7-89-88-e6-9c-ac-e5-ba-93-e6-9d-a5showlog/index.html">
+<meta property="og:site_name" content="aWeBird">
 <meta property="og:description" content="虽然相比如日中天的git来说早已是明日黄花，但由于历史或团队的原因，svn还是目前应用最广泛的版本控制管理工具。随着日积月累的修修改改，我们会越来越倚重于svn的showlog功能来查看某一段代码的修改记录，但是svn的所有历史版本和这些修改记录都存在服务器上，client端只有一个最新update的版本，这样如果处于离线状态或server在内网，还有像我们现在这样开发团队在不同的城市的话，那么">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://awebird.com/blog/wp-content/uploads/2013/07/Little_Turtle_Fly_Away-300x209.jpg">
@@ -22,7 +22,7 @@
 <meta name="twitter:description" content="虽然相比如日中天的git来说早已是明日黄花，但由于历史或团队的原因，svn还是目前应用最广泛的版本控制管理工具。随着日积月累的修修改改，我们会越来越倚重于svn的showlog功能来查看某一段代码的修改记录，但是svn的所有历史版本和这些修改记录都存在服务器上，client端只有一个最新update的版本，这样如果处于离线状态或server在内网，还有像我们现在这样开发团队在不同的城市的话，那么">
 <meta name="twitter:image" content="http://awebird.com/blog/wp-content/uploads/2013/07/Little_Turtle_Fly_Away-300x209.jpg">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="aWeBird" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -41,8 +41,12 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
+        <a href="/" id="logo">aWeBird</a>
       </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">a web bird&#39;s blog</a>
+        </h2>
       
     </div>
     <div id="header-inner" class="inner">
@@ -61,7 +65,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://awebird.com"></form>
       </div>
     </div>
   </div>
@@ -93,7 +97,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a href="http://awebird.com/blog/wp-content/uploads/2013/07/Little_Turtle_Fly_Away.jpg" target="_blank" rel="noopener"><img src="http://awebird.com/blog/wp-content/uploads/2013/07/Little_Turtle_Fly_Away-300x209.jpg" alt="Little_Turtle_Fly_Away"></a> 虽然相比如日中天的git来说早已是明日黄花，但由于历史或团队的原因，svn还是目前应用最广泛的版本控制管理工具。随着日积月累的修修改改，我们会越来越倚重于svn的showlog功能来查看某一段代码的修改记录，但是svn的所有历史版本和这些修改记录都存在服务器上，client端只有一个最新update的版本，这样如果处于离线状态或server在内网，还有像我们现在这样开发团队在不同的城市的话，那么showlog的缓慢体验一定很糟糕。这里介绍一个使用subversion的svnsync工具在windows本机同步svn版本库的方法，从此你就可以‘脱机’顺畅的showlog了..</p>
+        <p><a href="http://awebird.com/blog/wp-content/uploads/2013/07/Little_Turtle_Fly_Away.jpg"><img src="http://awebird.com/blog/wp-content/uploads/2013/07/Little_Turtle_Fly_Away-300x209.jpg" alt="Little_Turtle_Fly_Away"></a> 虽然相比如日中天的git来说早已是明日黄花，但由于历史或团队的原因，svn还是目前应用最广泛的版本控制管理工具。随着日积月累的修修改改，我们会越来越倚重于svn的showlog功能来查看某一段代码的修改记录，但是svn的所有历史版本和这些修改记录都存在服务器上，client端只有一个最新update的版本，这样如果处于离线状态或server在内网，还有像我们现在这样开发团队在不同的城市的话，那么showlog的缓慢体验一定很糟糕。这里介绍一个使用subversion的svnsync工具在windows本机同步svn版本库的方法，从此你就可以‘脱机’顺畅的showlog了..</p>
 <ul>
 <li><strong>安装Subversion</strong></li>
 </ul>
@@ -125,12 +129,12 @@
 <ul>
 <li><strong>客户端Checkout</strong></li>
 </ul>
-<p>这个没什么好说的，就是使用你用来导出或者连接远程svn的客户端，比如TortoiseSVN，建立新文件夹（比如e:/svn_client/demoProject），checkout本地的svn版本库，注意版本库路径使用 file:///e:/svn_server/demoProject 即可，这样以后就可以“极速”showlog所有的历史版本和修改日志了，用来定位问题“狠”方便哦！！！ <strong>【注意】</strong>提醒一下，这个svn_client仅仅用来update和showlog，千万不要commit，否则会破坏同步的本地版本库，如果误操作了的话就需要删掉再把上面的所有步骤重新来过一遍了T-T 原文地址: <a href="http://awebird.com/blog/art/60" target="_blank" rel="noopener">http://awebird.com/blog/art/60</a></p>
+<p>这个没什么好说的，就是使用你用来导出或者连接远程svn的客户端，比如TortoiseSVN，建立新文件夹（比如e:/svn_client/demoProject），checkout本地的svn版本库，注意版本库路径使用 file:///e:/svn_server/demoProject 即可，这样以后就可以“极速”showlog所有的历史版本和修改日志了，用来定位问题“狠”方便哦！！！ <strong>【注意】</strong>提醒一下，这个svn_client仅仅用来update和showlog，千万不要commit，否则会破坏同步的本地版本库，如果误操作了的话就需要删掉再把上面的所有步骤重新来过一遍了T-T 原文地址: <a href="http://awebird.com/blog/art/60">http://awebird.com/blog/art/60</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2013/07/14/e4-bd-bf-e7-94-a8subversion-e7-9a-84svnsync-e5-9c-a8windows-e4-b8-8b-e5-90-8c-e6-ad-a5svn-e7-89-88-e6-9c-ac-e5-ba-93-e6-9d-a5showlog/" data-id="cjhx2lcyb000fpvpcep8ggy6c" class="article-share-link">Share</a>
+      <a data-url="http://awebird.com/2013/07/14/e4-bd-bf-e7-94-a8subversion-e7-9a-84svnsync-e5-9c-a8windows-e4-b8-8b-e5-90-8c-e6-ad-a5svn-e7-89-88-e6-9c-ac-e5-ba-93-e6-9d-a5showlog/" data-id="cji1fhx22000ha0pc8ma6fcdp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/showlog/">showlog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/subversion/">subversion</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/svn/">svn</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/svnsync/">svnsync</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/windows/">windows</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/日志/">日志</a></li></ul>
@@ -242,7 +246,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2018 John Doe<br>
+      &copy; 2018 awebird<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

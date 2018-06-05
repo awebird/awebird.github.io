@@ -5,14 +5,14 @@
   
 
   
-  <title>使用fiddler调试Native和Hybrid App | Hexo</title>
+  <title>使用fiddler调试Native和Hybrid App | aWeBird</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="前面一篇文章《使用fiddler将网站上的css js重定向至本地文件，进行在线调试》介绍过在使用Fiddler调试PC上浏览器运行的Web网站的方法。最近一段时间工作重心转移到移动端，遇到一些和Native App交互，和Hybrid App(包括微信公众号上运行的HTML5网站)的问题调试和解决，这种场景下，平时最常用的chrome控制台完全失效，Fiddler的优越性更体现出来了.. 具体">
 <meta name="keywords" content="fiddler,hybrid app,native app,微信,调试">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用fiddler调试Native和Hybrid App">
-<meta property="og:url" content="http://yoursite.com/2013/09/11/e4-bd-bf-e7-94-a8fiddler-e8-b0-83-e8-af-95native-e5-92-8chybrid-app/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:url" content="http://awebird.com/2013/09/11/e4-bd-bf-e7-94-a8fiddler-e8-b0-83-e8-af-95native-e5-92-8chybrid-app/index.html">
+<meta property="og:site_name" content="aWeBird">
 <meta property="og:description" content="前面一篇文章《使用fiddler将网站上的css js重定向至本地文件，进行在线调试》介绍过在使用Fiddler调试PC上浏览器运行的Web网站的方法。最近一段时间工作重心转移到移动端，遇到一些和Native App交互，和Hybrid App(包括微信公众号上运行的HTML5网站)的问题调试和解决，这种场景下，平时最常用的chrome控制台完全失效，Fiddler的优越性更体现出来了.. 具体">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://awebird.com/blog/wp-content/uploads/2013/09/14-300x183.jpg">
@@ -31,7 +31,7 @@
 <meta name="twitter:description" content="前面一篇文章《使用fiddler将网站上的css js重定向至本地文件，进行在线调试》介绍过在使用Fiddler调试PC上浏览器运行的Web网站的方法。最近一段时间工作重心转移到移动端，遇到一些和Native App交互，和Hybrid App(包括微信公众号上运行的HTML5网站)的问题调试和解决，这种场景下，平时最常用的chrome控制台完全失效，Fiddler的优越性更体现出来了.. 具体">
 <meta name="twitter:image" content="http://awebird.com/blog/wp-content/uploads/2013/09/14-300x183.jpg">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="aWeBird" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -50,8 +50,12 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
+        <a href="/" id="logo">aWeBird</a>
       </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">a web bird&#39;s blog</a>
+        </h2>
       
     </div>
     <div id="header-inner" class="inner">
@@ -70,7 +74,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://awebird.com"></form>
       </div>
     </div>
   </div>
@@ -102,12 +106,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a href="http://awebird.com/blog/wp-content/uploads/2013/09/14.jpg" target="_blank" rel="noopener"><img src="http://awebird.com/blog/wp-content/uploads/2013/09/14-300x183.jpg" alt="14"></a> 前面一篇文章《<a href="http://awebird.com/blog/art/108" target="_blank" rel="noopener">使用fiddler将网站上的css js重定向至本地文件，进行在线调试</a>》介绍过在使用Fiddler调试PC上浏览器运行的Web网站的方法。最近一段时间工作重心转移到移动端，遇到一些和Native App交互，和Hybrid App(包括微信公众号上运行的HTML5网站)的问题调试和解决，这种场景下，平时最常用的chrome控制台完全失效，Fiddler的优越性更体现出来了.. 具体的项目不方便透露和截图，Fiddler的用法前篇文章页介绍过，这边就简而化之，记录下手机连接Fiddler代理的方法，和分别举一个Native和Hybrid的例子说明下 <strong>【一】手机连接Fiddler</strong> （1）电脑上打开Fiddler Tools-Options-Connections <a href="http://awebird.com/blog/wp-content/uploads/2013/09/1.jpg" target="_blank" rel="noopener"><img src="http://awebird.com/blog/wp-content/uploads/2013/09/1-300x196.jpg" alt="1"></a> （2）获取本机的局域网IP地址（WIFI） 开始-cmd-ipconfig <a href="http://awebird.com/blog/wp-content/uploads/2013/09/2.jpg" target="_blank" rel="noopener"><img src="http://awebird.com/blog/wp-content/uploads/2013/09/2-300x128.jpg" alt="2"></a>   （3）手机连接同一wifi，长按wifi名，点“修改网络”-弹出高级选项，输入代理ip和端口 <a href="http://awebird.com/blog/wp-content/uploads/2013/09/3.jpg" target="_blank" rel="noopener"><img src="http://awebird.com/blog/wp-content/uploads/2013/09/3-300x221.jpg" alt="3"></a> <a href="http://awebird.com/blog/wp-content/uploads/2013/09/41.jpg" target="_blank" rel="noopener"><img src="http://awebird.com/blog/wp-content/uploads/2013/09/41-300x298.jpg" alt="4"></a> <strong>【二】检测Native App</strong> 这里以&lt;下厨房&gt;为例 app里的酸辣土豆丝 看到的是这样的 <a href="http://awebird.com/blog/wp-content/uploads/2013/09/5.jpg" target="_blank" rel="noopener"><img src="http://awebird.com/blog/wp-content/uploads/2013/09/5-300x163.jpg" alt="5"></a>   Fiddler里看到的数据是这样的 <a href="http://awebird.com/blog/wp-content/uploads/2013/09/6.jpg" target="_blank" rel="noopener"><img src="http://awebird.com/blog/wp-content/uploads/2013/09/6-300x244.jpg" alt="6"></a> 当然，并不是所有的app都是这么容易获取到接口和数据的，接口和数据保密做的比较好的app的接口数据还是会加密的（这个貌似webapp先天不足啊） 比如印象笔记EverNote，从接口只能得到这样的数据 <a href="http://awebird.com/blog/wp-content/uploads/2013/09/7.jpg" target="_blank" rel="noopener"><img src="http://awebird.com/blog/wp-content/uploads/2013/09/7-292x300.jpg" alt="7"></a> <strong>【三】检测Hybrid App</strong> 一个高帅富童鞋在微信里分享了个上海的酒店信息，连七天都住不起的程序猿表示很内伤 <a href="http://awebird.com/blog/wp-content/uploads/2013/09/11.jpg" target="_blank" rel="noopener"><img src="http://awebird.com/blog/wp-content/uploads/2013/09/11-300x150.jpg" alt="11"></a> 在Fiddler里是这样的 <a href="http://awebird.com/blog/wp-content/uploads/2013/09/12.jpg" target="_blank" rel="noopener"><img src="http://awebird.com/blog/wp-content/uploads/2013/09/12-300x289.jpg" alt="12"></a>   既然是web的，直接在电脑上也能打开url查看了 <a href="http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5NzIxMzU4MA%3D%3D&amp;appmsgid=10000336&amp;itemidx=1&amp;sign=a2b82a70c4a2873f43bf42f2a81b1feb&amp;scene=1&amp;from=message&amp;isappinstalled=0&amp;uin=ODE1Nzg3MjU%3D&amp;key=6a68cf733852b46cfc334349e3ce065b1fa40aea1e36d2c02d4cff481d0b354c3b5f156714ef47e399d09c5d225f0f74&amp;devicetype=android-16&amp;version=25000027&amp;lang=zh_CN" target="_blank" rel="noopener">http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5NzIxMzU4MA%3D%3D&amp;appmsgid=10000336&amp;itemidx=1&amp;sign=a2b82a70c4a2873f43bf42f2a81b1feb&amp;scene=1&amp;from=message&amp;isappinstalled=0&amp;uin=ODE1Nzg3MjU%3D&amp;key=6a68cf733852b46cfc334349e3ce065b1fa40aea1e36d2c02d4cff481d0b354c3b5f156714ef47e399d09c5d225f0f74&amp;devicetype=android-16&amp;version=25000027&amp;lang=zh_CN</a> 【结语】 这篇主要是介绍了基本的过程，也留着自己时间长了忘记了（经常发生）回来查阅 ，真正遇到问题时往往要换用不同的设备，查看http头（比如最近遇到一个mobile safari上返回键，form表单post data丢失的问题，就只能使用iphone/itouch设备连接Fiddler，边改程序边分析http的request和response） 好吧，就到这里，总之Fiddler确实是个很不错的工具。好的工具可以协助我们做出更好的产品，个人认为web开发测试都应该掌握并经常使用 <strong>本文地址：<a href="http://awebird.com/blog/art/161" target="_blank" rel="noopener">http://awebird.com/blog/art/161/</a></strong></p>
+        <p><a href="http://awebird.com/blog/wp-content/uploads/2013/09/14.jpg"><img src="http://awebird.com/blog/wp-content/uploads/2013/09/14-300x183.jpg" alt="14"></a> 前面一篇文章《<a href="http://awebird.com/blog/art/108">使用fiddler将网站上的css js重定向至本地文件，进行在线调试</a>》介绍过在使用Fiddler调试PC上浏览器运行的Web网站的方法。最近一段时间工作重心转移到移动端，遇到一些和Native App交互，和Hybrid App(包括微信公众号上运行的HTML5网站)的问题调试和解决，这种场景下，平时最常用的chrome控制台完全失效，Fiddler的优越性更体现出来了.. 具体的项目不方便透露和截图，Fiddler的用法前篇文章页介绍过，这边就简而化之，记录下手机连接Fiddler代理的方法，和分别举一个Native和Hybrid的例子说明下 <strong>【一】手机连接Fiddler</strong> （1）电脑上打开Fiddler Tools-Options-Connections <a href="http://awebird.com/blog/wp-content/uploads/2013/09/1.jpg"><img src="http://awebird.com/blog/wp-content/uploads/2013/09/1-300x196.jpg" alt="1"></a> （2）获取本机的局域网IP地址（WIFI） 开始-cmd-ipconfig <a href="http://awebird.com/blog/wp-content/uploads/2013/09/2.jpg"><img src="http://awebird.com/blog/wp-content/uploads/2013/09/2-300x128.jpg" alt="2"></a>   （3）手机连接同一wifi，长按wifi名，点“修改网络”-弹出高级选项，输入代理ip和端口 <a href="http://awebird.com/blog/wp-content/uploads/2013/09/3.jpg"><img src="http://awebird.com/blog/wp-content/uploads/2013/09/3-300x221.jpg" alt="3"></a> <a href="http://awebird.com/blog/wp-content/uploads/2013/09/41.jpg"><img src="http://awebird.com/blog/wp-content/uploads/2013/09/41-300x298.jpg" alt="4"></a> <strong>【二】检测Native App</strong> 这里以&lt;下厨房&gt;为例 app里的酸辣土豆丝 看到的是这样的 <a href="http://awebird.com/blog/wp-content/uploads/2013/09/5.jpg"><img src="http://awebird.com/blog/wp-content/uploads/2013/09/5-300x163.jpg" alt="5"></a>   Fiddler里看到的数据是这样的 <a href="http://awebird.com/blog/wp-content/uploads/2013/09/6.jpg"><img src="http://awebird.com/blog/wp-content/uploads/2013/09/6-300x244.jpg" alt="6"></a> 当然，并不是所有的app都是这么容易获取到接口和数据的，接口和数据保密做的比较好的app的接口数据还是会加密的（这个貌似webapp先天不足啊） 比如印象笔记EverNote，从接口只能得到这样的数据 <a href="http://awebird.com/blog/wp-content/uploads/2013/09/7.jpg"><img src="http://awebird.com/blog/wp-content/uploads/2013/09/7-292x300.jpg" alt="7"></a> <strong>【三】检测Hybrid App</strong> 一个高帅富童鞋在微信里分享了个上海的酒店信息，连七天都住不起的程序猿表示很内伤 <a href="http://awebird.com/blog/wp-content/uploads/2013/09/11.jpg"><img src="http://awebird.com/blog/wp-content/uploads/2013/09/11-300x150.jpg" alt="11"></a> 在Fiddler里是这样的 <a href="http://awebird.com/blog/wp-content/uploads/2013/09/12.jpg"><img src="http://awebird.com/blog/wp-content/uploads/2013/09/12-300x289.jpg" alt="12"></a>   既然是web的，直接在电脑上也能打开url查看了 <a href="http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5NzIxMzU4MA%3D%3D&amp;appmsgid=10000336&amp;itemidx=1&amp;sign=a2b82a70c4a2873f43bf42f2a81b1feb&amp;scene=1&amp;from=message&amp;isappinstalled=0&amp;uin=ODE1Nzg3MjU%3D&amp;key=6a68cf733852b46cfc334349e3ce065b1fa40aea1e36d2c02d4cff481d0b354c3b5f156714ef47e399d09c5d225f0f74&amp;devicetype=android-16&amp;version=25000027&amp;lang=zh_CN" target="_blank" rel="noopener">http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5NzIxMzU4MA%3D%3D&amp;appmsgid=10000336&amp;itemidx=1&amp;sign=a2b82a70c4a2873f43bf42f2a81b1feb&amp;scene=1&amp;from=message&amp;isappinstalled=0&amp;uin=ODE1Nzg3MjU%3D&amp;key=6a68cf733852b46cfc334349e3ce065b1fa40aea1e36d2c02d4cff481d0b354c3b5f156714ef47e399d09c5d225f0f74&amp;devicetype=android-16&amp;version=25000027&amp;lang=zh_CN</a> 【结语】 这篇主要是介绍了基本的过程，也留着自己时间长了忘记了（经常发生）回来查阅 ，真正遇到问题时往往要换用不同的设备，查看http头（比如最近遇到一个mobile safari上返回键，form表单post data丢失的问题，就只能使用iphone/itouch设备连接Fiddler，边改程序边分析http的request和response） 好吧，就到这里，总之Fiddler确实是个很不错的工具。好的工具可以协助我们做出更好的产品，个人认为web开发测试都应该掌握并经常使用 <strong>本文地址：<a href="http://awebird.com/blog/art/161">http://awebird.com/blog/art/161/</a></strong></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2013/09/11/e4-bd-bf-e7-94-a8fiddler-e8-b0-83-e8-af-95native-e5-92-8chybrid-app/" data-id="cjhx2lcy9000bpvpchhcpc9m2" class="article-share-link">Share</a>
+      <a data-url="http://awebird.com/2013/09/11/e4-bd-bf-e7-94-a8fiddler-e8-b0-83-e8-af-95native-e5-92-8chybrid-app/" data-id="cji1fhx26000ma0pczre05xni" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fiddler/">fiddler</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hybrid-app/">hybrid app</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/native-app/">native app</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/微信/">微信</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/调试/">调试</a></li></ul>
@@ -219,7 +223,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2018 John Doe<br>
+      &copy; 2018 awebird<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

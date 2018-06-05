@@ -5,14 +5,14 @@
   
 
   
-  <title>中转服务器JSONP跨域 &amp; 使用CORS跨域 | Hexo</title>
+  <title>中转服务器JSONP跨域 &amp; 使用CORS跨域 | aWeBird</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="由于项目中使用较多前后端分离，所以跨域成了经常要面对的问题。 （1）JSONP跨域，通过中转服务器中转 跨域的一种常用方式是jsonp，如果可以修改服务器端数据的话，需要js和服务器端同时处理对接，如果没有服务器端接口的修改权限，也可以在任意自己可以修改的服务器端的域里放一个中转文件url4ajax.php &amp;lt;?php$server_url=urldecode($_GET[‘url’]);">
-<meta name="keywords" content="javascript,CORS,JSONP,PHP,跨域">
+<meta name="keywords" content="CORS,javascript,JSONP,PHP,跨域">
 <meta property="og:type" content="article">
 <meta property="og:title" content="中转服务器JSONP跨域 &amp; 使用CORS跨域">
-<meta property="og:url" content="http://yoursite.com/2013/07/07/e4-b8-ad-e8-bd-ac-e6-9c-8d-e5-8a-a1-e5-99-a8jsonp-e8-b7-a8-e5-9f-9f-e4-bd-bf-e7-94-a8cros-e8-b7-a8-e5-9f-9f/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:url" content="http://awebird.com/2013/07/07/e4-b8-ad-e8-bd-ac-e6-9c-8d-e5-8a-a1-e5-99-a8jsonp-e8-b7-a8-e5-9f-9f-e4-bd-bf-e7-94-a8cros-e8-b7-a8-e5-9f-9f/index.html">
+<meta property="og:site_name" content="aWeBird">
 <meta property="og:description" content="由于项目中使用较多前后端分离，所以跨域成了经常要面对的问题。 （1）JSONP跨域，通过中转服务器中转 跨域的一种常用方式是jsonp，如果可以修改服务器端数据的话，需要js和服务器端同时处理对接，如果没有服务器端接口的修改权限，也可以在任意自己可以修改的服务器端的域里放一个中转文件url4ajax.php &amp;lt;?php$server_url=urldecode($_GET[‘url’]);">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://awebird.com/blog/wp-content/uploads/2013/07/gg-300x155.jpg">
@@ -22,7 +22,7 @@
 <meta name="twitter:description" content="由于项目中使用较多前后端分离，所以跨域成了经常要面对的问题。 （1）JSONP跨域，通过中转服务器中转 跨域的一种常用方式是jsonp，如果可以修改服务器端数据的话，需要js和服务器端同时处理对接，如果没有服务器端接口的修改权限，也可以在任意自己可以修改的服务器端的域里放一个中转文件url4ajax.php &amp;lt;?php$server_url=urldecode($_GET[‘url’]);">
 <meta name="twitter:image" content="http://awebird.com/blog/wp-content/uploads/2013/07/gg-300x155.jpg">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="aWeBird" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -41,8 +41,12 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
+        <a href="/" id="logo">aWeBird</a>
       </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">a web bird&#39;s blog</a>
+        </h2>
       
     </div>
     <div id="header-inner" class="inner">
@@ -61,7 +65,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://awebird.com"></form>
       </div>
     </div>
   </div>
@@ -93,7 +97,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a href="http://awebird.com/blog/wp-content/uploads/2013/07/gg.jpg" target="_blank" rel="noopener"><img src="http://awebird.com/blog/wp-content/uploads/2013/07/gg-300x155.jpg" alt="gg"></a> 由于项目中使用较多前后端分离，所以跨域成了经常要面对的问题。 <strong>（1）JSONP跨域，通过中转服务器中转</strong> 跨域的一种常用方式是jsonp，如果可以修改服务器端数据的话，需要js和服务器端同时处理对接，如果没有服务器端接口的修改权限，也可以在任意自己可以修改的服务器端的域里放一个中转文件url4ajax.php</p>
+        <p><a href="http://awebird.com/blog/wp-content/uploads/2013/07/gg.jpg"><img src="http://awebird.com/blog/wp-content/uploads/2013/07/gg-300x155.jpg" alt="gg"></a> 由于项目中使用较多前后端分离，所以跨域成了经常要面对的问题。 <strong>（1）JSONP跨域，通过中转服务器中转</strong> 跨域的一种常用方式是jsonp，如果可以修改服务器端数据的话，需要js和服务器端同时处理对接，如果没有服务器端接口的修改权限，也可以在任意自己可以修改的服务器端的域里放一个中转文件url4ajax.php</p>
 <p>&lt;?php<br>$server_url=urldecode($_GET[‘url’]);</p>
 <p>$json=file_get_contents($server_url);</p>
 <p>if(empty($_GET[‘callback’])){<br>    echo $json; //ajax json<br>}elseif($_GET[‘notjson’] &amp;&amp; $_GET[‘notjson’]==’1’){<br>    echo trim($_GET[‘callback’]).”({‘content’:’”.mysql_real_escape_string(trim($json)).”‘})”; //ajax jsonp 返回数据不为json时，拼接成json<br>}else{<br>    echo trim($_GET[‘callback’]).’(‘.$json.’)’; //ajax jsonp<br>}</p>
@@ -105,12 +109,12 @@
 <p>&lt;!DOCTYPE html&gt;</p>
 <html><br><head><br>    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"><br>    <meta name="apple-mobile-web-app-capable" content="yes"><br>    <title>测试CROS</title><br></head><br><body><br><label>输入姓名：</label><input id="user_input" type="text"><br><input id="submit_btn" type="button" value="点击发送"><br><br><label>收到反馈：<label id="respose_text" style="color:red;"></label><br><script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script><br><script type="text/javascript"><br>        $(‘#submit_btn’).click(function(){<br>            $.ajax({<br>                url:’<a href="http://www.serverurl.com/test_cors.php&#39;">http://www.serverurl.com/test_cors.php&#39;</a>,<br>                data:{name:$(‘#user_input’).val()},<br>                dataType:”text”,<br>                type:”POST”,<br>                success:function (result,textStatus){<br>                    $(‘#respose_text’).text(result);<br>                }<br>            });<br>        });<br></script><br></label></body><br></html>
 
-<p>原文地址: <a href="http://awebird.com/blog/art/26" target="_blank" rel="noopener">http://awebird.com/blog/art/26</a></p>
+<p>原文地址: <a href="http://awebird.com/blog/art/26">http://awebird.com/blog/art/26</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2013/07/07/e4-b8-ad-e8-bd-ac-e6-9c-8d-e5-8a-a1-e5-99-a8jsonp-e8-b7-a8-e5-9f-9f-e4-bd-bf-e7-94-a8cros-e8-b7-a8-e5-9f-9f/" data-id="cjhx2lcy30008pvpc6bz0pnqx" class="article-share-link">Share</a>
+      <a data-url="http://awebird.com/2013/07/07/e4-b8-ad-e8-bd-ac-e6-9c-8d-e5-8a-a1-e5-99-a8jsonp-e8-b7-a8-e5-9f-9f-e4-bd-bf-e7-94-a8cros-e8-b7-a8-e5-9f-9f/" data-id="cji1fhx1n0009a0pcqgm4urpa" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CORS/">CORS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JSONP/">JSONP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/跨域/">跨域</a></li></ul>
@@ -222,7 +226,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2018 John Doe<br>
+      &copy; 2018 awebird<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
