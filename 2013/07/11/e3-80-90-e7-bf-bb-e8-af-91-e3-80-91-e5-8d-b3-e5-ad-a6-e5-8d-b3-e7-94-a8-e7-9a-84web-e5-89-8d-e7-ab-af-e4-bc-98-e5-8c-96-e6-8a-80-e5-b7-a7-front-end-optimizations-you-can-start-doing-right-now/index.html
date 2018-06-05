@@ -8,20 +8,20 @@
   <title>【翻译】即学即用的Web前端优化技巧 ( Front-end optimizations you can start doing right now ) | aWeBird</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="英文原文 http://odiseo.net/javascript/front-end-optimizations-you-can-do-right-now-on-your-existing-code  强烈建议各位Web前端开发人员都要“真正”去学习Javascript并且掌握基本的DOM知识。诚然我也不得不赞同，不少基于Javascript特性的小把戏和小技巧根本就不会带来终端用户能明显觉察到">
-<meta name="keywords" content="javascript,Front-end,jquery,optimization,Web,优化,前端,翻译">
+<meta name="keywords" content="Front-end,javascript,jquery,optimization,Web,优化,前端,翻译">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【翻译】即学即用的Web前端优化技巧 ( Front-end optimizations you can start doing right now )">
 <meta property="og:url" content="http://awebird.com/2013/07/11/e3-80-90-e7-bf-bb-e8-af-91-e3-80-91-e5-8d-b3-e5-ad-a6-e5-8d-b3-e7-94-a8-e7-9a-84web-e5-89-8d-e7-ab-af-e4-bc-98-e5-8c-96-e6-8a-80-e5-b7-a7-front-end-optimizations-you-can-start-doing-right-now/index.html">
 <meta property="og:site_name" content="aWeBird">
 <meta property="og:description" content="英文原文 http://odiseo.net/javascript/front-end-optimizations-you-can-do-right-now-on-your-existing-code  强烈建议各位Web前端开发人员都要“真正”去学习Javascript并且掌握基本的DOM知识。诚然我也不得不赞同，不少基于Javascript特性的小把戏和小技巧根本就不会带来终端用户能明显觉察到">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://awebird.com/2013/07/11/uploads/2013/07/thumb-300x144.jpg">
-<meta property="og:image" content="http://awebird.com/2013/07/11/uploads/2013/07/C9LBtwc-208x300.png">
-<meta property="og:updated_time" content="2018-06-05T09:58:35.001Z">
+<meta property="og:image" content="http://awebird.com/images/uploads/2013/07/thumb-300x144.jpg">
+<meta property="og:image" content="http://awebird.com/images/uploads/2013/07/C9LBtwc-208x300.png">
+<meta property="og:updated_time" content="2018-06-05T10:34:12.716Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【翻译】即学即用的Web前端优化技巧 ( Front-end optimizations you can start doing right now )">
 <meta name="twitter:description" content="英文原文 http://odiseo.net/javascript/front-end-optimizations-you-can-do-right-now-on-your-existing-code  强烈建议各位Web前端开发人员都要“真正”去学习Javascript并且掌握基本的DOM知识。诚然我也不得不赞同，不少基于Javascript特性的小把戏和小技巧根本就不会带来终端用户能明显觉察到">
-<meta name="twitter:image" content="http://awebird.com/2013/07/11/uploads/2013/07/thumb-300x144.jpg">
+<meta name="twitter:image" content="http://awebird.com/images/uploads/2013/07/thumb-300x144.jpg">
   
     <link rel="alternate" href="/atom.xml" title="aWeBird" type="application/atom+xml">
   
@@ -98,11 +98,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>英文原文 <a href="http://odiseo.net/javascript/front-end-optimizations-you-can-do-right-now-on-your-existing-code" target="_blank" rel="noopener">http://odiseo.net/javascript/front-end-optimizations-you-can-do-right-now-on-your-existing-code</a> <a href="../uploads/2013/07/thumb.jpg"><img src="../uploads/2013/07/thumb-300x144.jpg" alt="thumb"></a> 强烈建议各位Web前端开发人员都要“真正”去<a href="http://javascriptissexy.com/16-javascript-concepts-you-must-know-well/" target="_blank" rel="noopener">学习Javascript</a>并且掌握基本的<a href="http://domenlightenment.com/" target="_blank" rel="noopener">DOM</a>知识。诚然我也不得不赞同，不少基于Javascript特性的小把戏和小技巧根本就不会带来终端用户能明显觉察到的<a href="http://ericleads.com/2013/04/youre-optimizing-the-wrong-things/" target="_blank" rel="noopener">性能提升</a>。话虽如此，我会在这篇文章里分享一些优化技巧，你可以马上在代码里使用这些技巧从而让程序跑的更快。而且从今以后，每当在项目里使用Javascript的时候你都应该想到并实践这些优化。</p>
+        <p>英文原文 <a href="http://odiseo.net/javascript/front-end-optimizations-you-can-do-right-now-on-your-existing-code" target="_blank" rel="noopener">http://odiseo.net/javascript/front-end-optimizations-you-can-do-right-now-on-your-existing-code</a> <a href="/images/uploads/2013/07/thumb.jpg"><img src="/images/uploads/2013/07/thumb-300x144.jpg" alt="thumb"></a> 强烈建议各位Web前端开发人员都要“真正”去<a href="http://javascriptissexy.com/16-javascript-concepts-you-must-know-well/" target="_blank" rel="noopener">学习Javascript</a>并且掌握基本的<a href="http://domenlightenment.com/" target="_blank" rel="noopener">DOM</a>知识。诚然我也不得不赞同，不少基于Javascript特性的小把戏和小技巧根本就不会带来终端用户能明显觉察到的<a href="http://ericleads.com/2013/04/youre-optimizing-the-wrong-things/" target="_blank" rel="noopener">性能提升</a>。话虽如此，我会在这篇文章里分享一些优化技巧，你可以马上在代码里使用这些技巧从而让程序跑的更快。而且从今以后，每当在项目里使用Javascript的时候你都应该想到并实践这些优化。</p>
 <h1 id="精明的使用选择器-Use-selectors-wisely"><a href="#精明的使用选择器-Use-selectors-wisely" class="headerlink" title="精明的使用选择器 Use selectors wisely"></a>精明的使用选择器 Use selectors wisely</h1><p>假设程序里有一个id为#profile-container的div, 你想在其内部选择一个或多个class为myClass的input元素。你可能会很快写出下面这样一个jquery选择器：</p>
 <p>$(‘#profile-container input.myClass’)</p>
 <p>这句可以满足需求，但并不是最好的方法。事实上，<strong>$(‘#profile-container’).find(‘input.myClass’)</strong>会比上面那句更快。为什么呢？这需要了解下<a href="http://blog.bigbinary.com/2010/02/15/how-jquery-selects-elements-using-sizzle.html" target="_blank" rel="noopener">Jquery选择器机制</a>。首先，$(‘#profile-container’)这个选择器可以很快的获得要选取的部分，这样当使用find()的时候，就会限制在一个很有限的查找范围，从而提升了性能。可以参开<a href="http://www.explainjs.com/explain?src=http://code.jquery.com/jquery-1.9.1.js" target="_blank" rel="noopener">Jquery源码</a>。 Rob Tarr的<a href="http://seesparkbox.com/foundry/jquery_selector_performance_testing" target="_blank" rel="noopener">文章</a>给出的一些测试结果可以印证这点，他还发现如果链式的使用find()逐层查找会更快，比如<strong>$(‘.container’).find(‘.main’).find(‘ul.list-1′).find(‘li’)</strong></p>
-<p><a href="../uploads/2013/07/C9LBtwc.png"><img src="../uploads/2013/07/C9LBtwc-208x300.png" alt="C9LBtwc.png"></a></p>
+<p><a href="/images/uploads/2013/07/C9LBtwc.png"><img src="/images/uploads/2013/07/C9LBtwc-208x300.png" alt="C9LBtwc.png"></a></p>
 <p><em>seesparkbox.com给出的选择器测试比较的结果</em></p>
 <p>另一种精明的使用选择器提高性能的办法就是明确的的声明需要查找的元素类型。比如，如果我们知道要选择的元素类型的话，<strong>$(‘ul.todo’)</strong>明显会比<strong>$(‘.todo’)</strong>快的多。</p>
 <h1 id="缓存jQuery选择器的结果-Cache-jQuery-selector-results"><a href="#缓存jQuery选择器的结果-Cache-jQuery-selector-results" class="headerlink" title="缓存jQuery选择器的结果 Cache jQuery selector results"></a>缓存jQuery选择器的结果 Cache jQuery selector results</h1><p>这实际上是一个总所周知的技巧，“不要重复”是经典的提升性能的准则和最佳实践。在Greg Franko精彩的幻灯片“<a href="http://gregfranko.com/jquery-best-practices/" target="_blank" rel="noopener">jQuery最佳实践</a>”里有一个有趣的例子：</p>
@@ -160,7 +160,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://awebird.com/2013/07/11/e3-80-90-e7-bf-bb-e8-af-91-e3-80-91-e5-8d-b3-e5-ad-a6-e5-8d-b3-e7-94-a8-e7-9a-84web-e5-89-8d-e7-ab-af-e4-bc-98-e5-8c-96-e6-8a-80-e5-b7-a7-front-end-optimizations-you-can-start-doing-right-now/" data-id="cji1iikna0008jipck0k7hxi8" class="article-share-link">Share</a>
+      <a data-url="http://awebird.com/2013/07/11/e3-80-90-e7-bf-bb-e8-af-91-e3-80-91-e5-8d-b3-e5-ad-a6-e5-8d-b3-e7-94-a8-e7-9a-84web-e5-89-8d-e7-ab-af-e4-bc-98-e5-8c-96-e6-8a-80-e5-b7-a7-front-end-optimizations-you-can-start-doing-right-now/" data-id="cji1jvgib0003pcpcbg76yn8b" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jquery/">jquery</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/optimization/">optimization</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/优化/">优化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/翻译/">翻译</a></li></ul>

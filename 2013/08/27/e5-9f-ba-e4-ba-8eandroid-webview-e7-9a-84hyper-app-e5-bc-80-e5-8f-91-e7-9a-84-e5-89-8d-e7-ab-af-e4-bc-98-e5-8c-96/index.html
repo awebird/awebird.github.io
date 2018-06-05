@@ -15,14 +15,14 @@
 <meta property="og:site_name" content="aWeBird">
 <meta property="og:description" content="最近做一个项目，是将一个相对复杂（内容后台模块化配置）的mobile web页面嵌入到Android的webview展示，把遇到的问题和一些经验总结下 （1）图片！图片！图片！ 我觉得不管是原生App还是Web App，加载优化的第一条就是合理的设置图片，这点往往容易被忽视。一切只在WIFI环境下的测试都是耍流氓！ 这个项目的主页面，一开始前端负责切图的同事给出的静态页居然有1M多，其中最大的一">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://awebird.com/2013/08/27/uploads/2013/08/webview-300x102.jpg">
+<meta property="og:image" content="http://awebird.com/images/uploads/2013/08/webview-300x102.jpg">
 <meta property="og:image" content="http://awebird.com/2013/08/27/e5-9f-ba-e4-ba-8eandroid-webview-e7-9a-84hyper-app-e5-bc-80-e5-8f-91-e7-9a-84-e5-89-8d-e7-ab-af-e4-bc-98-e5-8c-96/upload/images/other/load_full.jpg">
 <meta property="og:image" content="http://awebird.com/2013/08/27/e5-9f-ba-e4-ba-8eandroid-webview-e7-9a-84hyper-app-e5-bc-80-e5-8f-91-e7-9a-84-e5-89-8d-e7-ab-af-e4-bc-98-e5-8c-96/upload/images/other/load_half.jpg">
-<meta property="og:updated_time" content="2018-06-05T09:58:35.002Z">
+<meta property="og:updated_time" content="2018-06-05T10:34:12.717Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于Android Webview的Hybrid App开发的前端优化">
 <meta name="twitter:description" content="最近做一个项目，是将一个相对复杂（内容后台模块化配置）的mobile web页面嵌入到Android的webview展示，把遇到的问题和一些经验总结下 （1）图片！图片！图片！ 我觉得不管是原生App还是Web App，加载优化的第一条就是合理的设置图片，这点往往容易被忽视。一切只在WIFI环境下的测试都是耍流氓！ 这个项目的主页面，一开始前端负责切图的同事给出的静态页居然有1M多，其中最大的一">
-<meta name="twitter:image" content="http://awebird.com/2013/08/27/uploads/2013/08/webview-300x102.jpg">
+<meta name="twitter:image" content="http://awebird.com/images/uploads/2013/08/webview-300x102.jpg">
   
     <link rel="alternate" href="/atom.xml" title="aWeBird" type="application/atom+xml">
   
@@ -99,7 +99,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a href="../uploads/2013/08/webview.jpg"><img src="../uploads/2013/08/webview-300x102.jpg" alt="webview"></a> 最近做一个项目，是将一个相对复杂（内容后台模块化配置）的mobile web页面嵌入到Android的webview展示，把遇到的问题和一些经验总结下 <strong>（1）图片！图片！图片！</strong> 我觉得不管是原生App还是Web App，加载优化的第一条就是合理的设置图片，这点往往容易被忽视。一切只在WIFI环境下的测试都是耍流氓！ 这个项目的主页面，一开始前端负责切图的同事给出的静态页居然有1M多，其中最大的一张banner图接近300K! 直接从PSD切出来的高保真原汁原味的展示效果确实震撼，百分比布局下，在chrome放到全屏显示还是清晰无比。理想很丰满，现实却骨感，可惜我们不是生活在Provo，没有google fiber的情况下只能忍痛牺牲这种“网络不能承受之美”。wap页面就是手机上看的，一般4~5寸屏幕能清晰显示，6寸‘巨屏’牺牲点效果不影响使用就足够了。 目前总结大致的图片组成</p>
+        <p><a href="/images/uploads/2013/08/webview.jpg"><img src="/images/uploads/2013/08/webview-300x102.jpg" alt="webview"></a> 最近做一个项目，是将一个相对复杂（内容后台模块化配置）的mobile web页面嵌入到Android的webview展示，把遇到的问题和一些经验总结下 <strong>（1）图片！图片！图片！</strong> 我觉得不管是原生App还是Web App，加载优化的第一条就是合理的设置图片，这点往往容易被忽视。一切只在WIFI环境下的测试都是耍流氓！ 这个项目的主页面，一开始前端负责切图的同事给出的静态页居然有1M多，其中最大的一张banner图接近300K! 直接从PSD切出来的高保真原汁原味的展示效果确实震撼，百分比布局下，在chrome放到全屏显示还是清晰无比。理想很丰满，现实却骨感，可惜我们不是生活在Provo，没有google fiber的情况下只能忍痛牺牲这种“网络不能承受之美”。wap页面就是手机上看的，一般4~5寸屏幕能清晰显示，6寸‘巨屏’牺牲点效果不影响使用就足够了。 目前总结大致的图片组成</p>
 <ul>
 <li>横铺图片，大概占全屏的1/5~1/4左右的图片，建议30K左右</li>
 <li>橱窗图，宽度1/4~1/2方图，8~15K</li>
@@ -188,7 +188,7 @@ $.ajax({
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://awebird.com/2013/08/27/e5-9f-ba-e4-ba-8eandroid-webview-e7-9a-84hyper-app-e5-bc-80-e5-8f-91-e7-9a-84-e5-89-8d-e7-ab-af-e4-bc-98-e5-8c-96/" data-id="cji1iiknv000rjipcnipgomrf" class="article-share-link">Share</a>
+      <a data-url="http://awebird.com/2013/08/27/e5-9f-ba-e4-ba-8eandroid-webview-e7-9a-84hyper-app-e5-bc-80-e5-8f-91-e7-9a-84-e5-89-8d-e7-ab-af-e4-bc-98-e5-8c-96/" data-id="cji1jvgiv000ipcpcvn987c6h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hybrid-app/">hybrid app</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webview/">webview</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
