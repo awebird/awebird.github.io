@@ -15,12 +15,12 @@
 <meta property="og:site_name" content="aWeBird">
 <meta property="og:description" content="在qq互联登录的开发中会遇到一个很麻烦的问题，就是遇到连不通的情况怎么进行调试？因为qq互联是需要提供网站的信息注册后分配appid等才能使用的，callback参数中需要指定返回到注册网站，简单的说，只有在域名所在网站的“生产环境”或者“现网环境”才能进行调试。如果生产环境不允许开发人员接入或者“流程很繁琐”的话怎么办？本文介绍了通过修改apache配置文件和修改HOSTS进行本机测试qq互联">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://awebird.com/blog/wp-content/uploads/2013/07/manle_qq-300x111.jpg">
-<meta property="og:updated_time" content="2018-06-02T07:21:53.105Z">
+<meta property="og:image" content="http://awebird.com/2013/07/19/uploads/2013/07/manle_qq-300x111.jpg">
+<meta property="og:updated_time" content="2018-06-05T09:58:35.001Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="通过修改apache配置文件和HOSTS在本机测试QQ互联登录的方法">
 <meta name="twitter:description" content="在qq互联登录的开发中会遇到一个很麻烦的问题，就是遇到连不通的情况怎么进行调试？因为qq互联是需要提供网站的信息注册后分配appid等才能使用的，callback参数中需要指定返回到注册网站，简单的说，只有在域名所在网站的“生产环境”或者“现网环境”才能进行调试。如果生产环境不允许开发人员接入或者“流程很繁琐”的话怎么办？本文介绍了通过修改apache配置文件和修改HOSTS进行本机测试qq互联">
-<meta name="twitter:image" content="http://awebird.com/blog/wp-content/uploads/2013/07/manle_qq-300x111.jpg">
+<meta name="twitter:image" content="http://awebird.com/2013/07/19/uploads/2013/07/manle_qq-300x111.jpg">
   
     <link rel="alternate" href="/atom.xml" title="aWeBird" type="application/atom+xml">
   
@@ -97,7 +97,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a href="http://awebird.com/blog/wp-content/uploads/2013/07/manle_qq.jpg"><img src="http://awebird.com/blog/wp-content/uploads/2013/07/manle_qq-300x111.jpg" alt="manle_qq"></a> 在qq互联登录的开发中会遇到一个很麻烦的问题，就是遇到连不通的情况怎么进行调试？因为qq互联是需要提供网站的信息注册后分配appid等才能使用的，callback参数中需要指定返回到注册网站，简单的说，只有在域名所在网站的“生产环境”或者“现网环境”才能进行调试。如果生产环境不允许开发人员接入或者“流程很繁琐”的话怎么办？本文介绍了通过修改apache配置文件和修改HOSTS进行本机测试qq互联的方法。 假设申请qq互联登录的生产环境的域名是 <a href="http://www.awebird.com" target="_blank" rel="noopener">www.awebird.com</a> 本地的网站根目录（apache）的路径是 C:\AppServ\www\awebird <strong>（1）修改apache的配置文件</strong> C:\AppServ\Apache2.2\conf\httpd.conf (修改前先备份)</p>
+        <p><a href="../uploads/2013/07/manle_qq.jpg"><img src="../uploads/2013/07/manle_qq-300x111.jpg" alt="manle_qq"></a> 在qq互联登录的开发中会遇到一个很麻烦的问题，就是遇到连不通的情况怎么进行调试？因为qq互联是需要提供网站的信息注册后分配appid等才能使用的，callback参数中需要指定返回到注册网站，简单的说，只有在域名所在网站的“生产环境”或者“现网环境”才能进行调试。如果生产环境不允许开发人员接入或者“流程很繁琐”的话怎么办？本文介绍了通过修改apache配置文件和修改HOSTS进行本机测试qq互联的方法。 假设申请qq互联登录的生产环境的域名是 <a href="http://www.awebird.com" target="_blank" rel="noopener">www.awebird.com</a> 本地的网站根目录（apache）的路径是 C:\AppServ\www\awebird <strong>（1）修改apache的配置文件</strong> C:\AppServ\Apache2.2\conf\httpd.conf (修改前先备份)</p>
 <p><directory "c:="" appserv="" www"=""><br>和<br>DocumentRoot “C:/AppServ/www”</directory></p>
 <p>这两行分别修改为</p>
 <p><directory "c:="" appserv="" www="" awebird"=""><br>和<br>DocumentRoot “C:/AppServ/www/awebird”</directory></p>
@@ -112,7 +112,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://awebird.com/2013/07/19/e9-80-9a-e8-bf-87-e4-bf-ae-e6-94-b9apache-e9-85-8d-e7-bd-ae-e6-96-87-e4-bb-b6-e5-92-8chosts-e5-9c-a8-e6-9c-ac-e6-9c-ba-e6-b5-8b-e8-af-95qq-e4-ba-92-e8-81-94-e7-9a-84-e6-96-b9-e6-b3-95/" data-id="cji1g2whq000qdbpcj8ci5lj9" class="article-share-link">Share</a>
+      <a data-url="http://awebird.com/2013/07/19/e9-80-9a-e8-bf-87-e4-bf-ae-e6-94-b9apache-e9-85-8d-e7-bd-ae-e6-96-87-e4-bb-b6-e5-92-8chosts-e5-9c-a8-e6-9c-ac-e6-9c-ba-e6-b5-8b-e8-af-95qq-e4-ba-92-e8-81-94-e7-9a-84-e6-96-b9-e6-b3-95/" data-id="cji1iikny000vjipcbva92m9e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apache/">apache</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hosts/">hosts</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/httpd-conf/">httpd.conf</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/qq互联/">qq互联</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/qq登录/">qq登录</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/本机/">本机</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/测试/">测试</a></li></ul>

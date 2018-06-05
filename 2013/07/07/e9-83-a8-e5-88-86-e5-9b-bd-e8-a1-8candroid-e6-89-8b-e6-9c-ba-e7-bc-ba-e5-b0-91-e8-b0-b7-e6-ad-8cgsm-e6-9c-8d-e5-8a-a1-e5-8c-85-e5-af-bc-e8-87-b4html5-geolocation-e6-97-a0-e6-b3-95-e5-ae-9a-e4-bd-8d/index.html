@@ -15,12 +15,12 @@
 <meta property="og:site_name" content="aWeBird">
 <meta property="og:description" content="最近项目上用到HTML5的geolocation用于定位，用Chrome和手头的手机测试好好的功能，到终端用户那里反馈一些手机不能定位，最后确定出是部分三星、摩托的部分国行Android手机“阉割”了谷歌GMS服务包，导致HTML5的geolocation无法使用wifi和基站定位服务导致。 值得一提的是前期在stackoverflow和google groups里搜到对症描述的解决方案（貌似A">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://awebird.com/blog/wp-content/uploads/2013/07/phone-150x300.jpg">
-<meta property="og:updated_time" content="2018-06-02T07:21:53.105Z">
+<meta property="og:image" content="http://awebird.com/2013/07/07/uploads/2013/07/phone-150x300.jpg">
+<meta property="og:updated_time" content="2018-06-05T09:58:35.002Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="部分国行Android手机缺少谷歌GMS服务包导致HTML5 Geolocation无法定位的问题">
 <meta name="twitter:description" content="最近项目上用到HTML5的geolocation用于定位，用Chrome和手头的手机测试好好的功能，到终端用户那里反馈一些手机不能定位，最后确定出是部分三星、摩托的部分国行Android手机“阉割”了谷歌GMS服务包，导致HTML5的geolocation无法使用wifi和基站定位服务导致。 值得一提的是前期在stackoverflow和google groups里搜到对症描述的解决方案（貌似A">
-<meta name="twitter:image" content="http://awebird.com/blog/wp-content/uploads/2013/07/phone-150x300.jpg">
+<meta name="twitter:image" content="http://awebird.com/2013/07/07/uploads/2013/07/phone-150x300.jpg">
   
     <link rel="alternate" href="/atom.xml" title="aWeBird" type="application/atom+xml">
   
@@ -97,7 +97,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a href="http://awebird.com/blog/wp-content/uploads/2013/07/phone.jpg"><img src="http://awebird.com/blog/wp-content/uploads/2013/07/phone-150x300.jpg" alt="phone"></a> 最近项目上用到HTML5的geolocation用于定位，用Chrome和手头的手机测试好好的功能，到终端用户那里反馈一些手机不能定位，最后确定出是部分三星、摩托的部分国行Android手机“阉割”了谷歌GMS服务包，导致HTML5的geolocation无法使用wifi和基站定位服务导致。 值得一提的是前期在stackoverflow和google groups里搜到对症描述的解决方案（貌似Android 2.*或者三星自身的问题）全部失效，因为介是个“中国特色”的问题-_lll 首先介绍下HTML5的Geolocation功能。通常情况下，我们是先判断浏览器是否支持geolocation, 如果不支持，可以提示错误，或者进入其他逻辑处理流程，现在移动端的智能手机浏览器绝大部分都是支持的。</p>
+        <p><a href="../uploads/2013/07/phone.jpg"><img src="../uploads/2013/07/phone-150x300.jpg" alt="phone"></a> 最近项目上用到HTML5的geolocation用于定位，用Chrome和手头的手机测试好好的功能，到终端用户那里反馈一些手机不能定位，最后确定出是部分三星、摩托的部分国行Android手机“阉割”了谷歌GMS服务包，导致HTML5的geolocation无法使用wifi和基站定位服务导致。 值得一提的是前期在stackoverflow和google groups里搜到对症描述的解决方案（貌似Android 2.*或者三星自身的问题）全部失效，因为介是个“中国特色”的问题-_lll 首先介绍下HTML5的Geolocation功能。通常情况下，我们是先判断浏览器是否支持geolocation, 如果不支持，可以提示错误，或者进入其他逻辑处理流程，现在移动端的智能手机浏览器绝大部分都是支持的。</p>
 <p>if( navigator.geolocation ){<br>    navigator.geolocation.getCurrentPosition(<br>        updateLocation, handleLocationError,<br>        {maximumAge:60000, timeout:50000, enableHighAccuracy:true}<br>        );<br>}else{<br>    alert( “对不起，您的浏览器不支持html5定位”);<br>}</p>
 <p>但是navigator.geolocation为true只是代表浏览器支持，浏览器还是要通过调用手机的定位功能来实现，所以上面的getCurrentPosition后面，分别后updateLocation和handleLocationError两个分支，分别对应成功而和失败的后续处理，这篇文章提到的由于缺少谷歌GMS服务包造成geolcation失效的情况就是走到了handleLocationError分支。</p>
 <p>function handleLocationError(error) {<br>    switch(error.code){<br>        case 0:<br>          alert(“获取位置信息出错！”);<br>          break;<br>        case 1:<br>          alert(“您设置了阻止该页面获取位置信息！”);<br>          break;<br>        case 2:<br>          alert(“浏览器无法确定您的位置！”);<br>          break;<br>        case 3:<br>          alert(“获取位置信息超时！”);<br>          break;<br>    }<br>}</p>
@@ -134,7 +134,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://awebird.com/2013/07/07/e9-83-a8-e5-88-86-e5-9b-bd-e8-a1-8candroid-e6-89-8b-e6-9c-ba-e7-bc-ba-e5-b0-91-e8-b0-b7-e6-ad-8cgsm-e6-9c-8d-e5-8a-a1-e5-8c-85-e5-af-bc-e8-87-b4html5-geolocation-e6-97-a0-e6-b3-95-e5-ae-9a-e4-bd-8d/" data-id="cji1g2wht000tdbpcpjwmcxak" class="article-share-link">Share</a>
+      <a data-url="http://awebird.com/2013/07/07/e9-83-a8-e5-88-86-e5-9b-bd-e8-a1-8candroid-e6-89-8b-e6-9c-ba-e7-bc-ba-e5-b0-91-e8-b0-b7-e6-ad-8cgsm-e6-9c-8d-e5-8a-a1-e5-8c-85-e5-af-bc-e8-87-b4html5-geolocation-e6-97-a0-e6-b3-95-e5-ae-9a-e4-bd-8d/" data-id="cji1iiko30012jipckz6ji0vu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GMS服务包/">GMS服务包</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Geolocation/">Geolocation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML5/">HTML5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IP定位/">IP定位</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/google/">google</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/国行/">国行</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/地图API/">地图API</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/百度/">百度</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/谷歌/">谷歌</a></li></ul>
