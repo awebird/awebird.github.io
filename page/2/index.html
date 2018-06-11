@@ -67,6 +67,106 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-e3-80-90-e7-bf-bb-e8-af-91-e3-80-91-e5-8d-b3-e5-ad-a6-e5-8d-b3-e7-94-a8-e7-9a-84web-e5-89-8d-e7-ab-af-e4-bc-98-e5-8c-96-e6-8a-80-e5-b7-a7-front-end-optimizations-you-can-start-doing-right-now" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/07/11/e3-80-90-e7-bf-bb-e8-af-91-e3-80-91-e5-8d-b3-e5-ad-a6-e5-8d-b3-e7-94-a8-e7-9a-84web-e5-89-8d-e7-ab-af-e4-bc-98-e5-8c-96-e6-8a-80-e5-b7-a7-front-end-optimizations-you-can-start-doing-right-now/" class="article-date">
+  <time datetime="2013-07-11T14:46:15.000Z" itemprop="datePublished">2013-07-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/07/11/e3-80-90-e7-bf-bb-e8-af-91-e3-80-91-e5-8d-b3-e5-ad-a6-e5-8d-b3-e7-94-a8-e7-9a-84web-e5-89-8d-e7-ab-af-e4-bc-98-e5-8c-96-e6-8a-80-e5-b7-a7-front-end-optimizations-you-can-start-doing-right-now/">【翻译】即学即用的Web前端优化技巧 ( Front-end optimizations you can start doing right now )</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>英文原文 <a href="http://odiseo.net/javascript/front-end-optimizations-you-can-do-right-now-on-your-existing-code" target="_blank" rel="noopener">http://odiseo.net/javascript/front-end-optimizations-you-can-do-right-now-on-your-existing-code</a> <a href="/images/uploads/2013/07/thumb.jpg"><img src="/images/uploads/2013/07/thumb-300x144.jpg" alt="thumb"></a> 强烈建议各位Web前端开发人员都要“真正”去<a href="http://javascriptissexy.com/16-javascript-concepts-you-must-know-well/" target="_blank" rel="noopener">学习Javascript</a>并且掌握基本的<a href="http://domenlightenment.com/" target="_blank" rel="noopener">DOM</a>知识。诚然我也不得不赞同，不少基于Javascript特性的小把戏和小技巧根本就不会带来终端用户能明显觉察到的<a href="http://ericleads.com/2013/04/youre-optimizing-the-wrong-things/" target="_blank" rel="noopener">性能提升</a>。话虽如此，我会在这篇文章里分享一些优化技巧，你可以马上在代码里使用这些技巧从而让程序跑的更快。而且从今以后，每当在项目里使用Javascript的时候你都应该想到并实践这些优化。</p>
+<h1 id="精明的使用选择器-Use-selectors-wisely"><a href="#精明的使用选择器-Use-selectors-wisely" class="headerlink" title="精明的使用选择器 Use selectors wisely"></a>精明的使用选择器 Use selectors wisely</h1><p>假设程序里有一个id为#profile-container的div, 你想在其内部选择一个或多个class为myClass的input元素。你可能会很快写出下面这样一个jquery选择器：</p>
+<p>$(‘#profile-container input.myClass’)</p>
+<p>这句可以满足需求，但并不是最好的方法。事实上，<strong>$(‘#profile-container’).find(‘input.myClass’)</strong>会比上面那句更快。为什么呢？这需要了解下<a href="http://blog.bigbinary.com/2010/02/15/how-jquery-selects-elements-using-sizzle.html" target="_blank" rel="noopener">Jquery选择器机制</a>。首先，$(‘#profile-container’)这个选择器可以很快的获得要选取的部分，这样当使用find()的时候，就会限制在一个很有限的查找范围，从而提升了性能。可以参开<a href="http://www.explainjs.com/explain?src=http://code.jquery.com/jquery-1.9.1.js" target="_blank" rel="noopener">Jquery源码</a>。 Rob Tarr的<a href="http://seesparkbox.com/foundry/jquery_selector_performance_testing" target="_blank" rel="noopener">文章</a>给出的一些测试结果可以印证这点，他还发现如果链式的使用find()逐层查找会更快，比如<strong>$(‘.container’).find(‘.main’).find(‘ul.list-1′).find(‘li’)</strong></p>
+<p><a href="/images/uploads/2013/07/C9LBtwc.png"><img src="/images/uploads/2013/07/C9LBtwc-208x300.png" alt="C9LBtwc.png"></a></p>
+<p><em>seesparkbox.com给出的选择器测试比较的结果</em></p>
+<p>另一种精明的使用选择器提高性能的办法就是明确的的声明需要查找的元素类型。比如，如果我们知道要选择的元素类型的话，<strong>$(‘ul.todo’)</strong>明显会比<strong>$(‘.todo’)</strong>快的多。</p>
+<h1 id="缓存jQuery选择器的结果-Cache-jQuery-selector-results"><a href="#缓存jQuery选择器的结果-Cache-jQuery-selector-results" class="headerlink" title="缓存jQuery选择器的结果 Cache jQuery selector results"></a>缓存jQuery选择器的结果 Cache jQuery selector results</h1><p>这实际上是一个总所周知的技巧，“不要重复”是经典的提升性能的准则和最佳实践。在Greg Franko精彩的幻灯片“<a href="http://gregfranko.com/jquery-best-practices/" target="_blank" rel="noopener">jQuery最佳实践</a>”里有一个有趣的例子：</p>
+<p>// Set’s an element’s title attribute using it’s current text<br> $(“.container input#elem”).attr(“title”, $(“.container input#elem”).text());<br>// Set’s an element’s text color to red<br> $(“.container input#elem”).css(“color”, “red”);<br>// Makes the element fade out<br> $(“.container input#elem”).fadeOut();</p>
+<p>问题就在于当我们每次调用<strong>$(“.container input#elem”)</strong>的时候，jQuery都需要使用一次选择器，也就是要遍历一遍所有的DOM。也是就说<strong>“.container input#elem”</strong>这个查找过程要重复执行4次！上面的代码应该修改成下面这样</p>
+<p>// Stores the live DOM element inside of a variable<br> var elem = $(“#elem”);<br>// Set’s an element’s title attribute using it’s current text<br> elem.attr(“title”, elem.text());<br>// Set’s an element’s text color to red<br> elem.css(“color”, “red”);<br>// Makes the element fade out<br> elem.fadeOut();</p>
+<p>注意这里很“抠门”的使用了选择器，因为我们要查找一个id，所以就没有必要去关心这个id是在某个class或者html元素里了。只需要#elem，这样即简单，也更快。</p>
+<h1 id="缓存-length属性-Cache-length-property"><a href="#缓存-length属性-Cache-length-property" class="headerlink" title="缓存.length属性 Cache .length property"></a>缓存.length属性 Cache .length property</h1><p>在Javascript里，每次获取数组的<strong>.length</strong>属性的时候，都需要进行一次运算。因为，对于下面这样一段代码：</p>
+<p>for (var i = 0; i &lt; myArray.length; i++){…}</p>
+<p>假设myArray数组大小是10000的话，每次循环计算一次， myArray.length的值就会重复计算10000次。所以你应该按下面这样写：</p>
+<p>var arrayLength = myArray.length;<br>for (var i = 0; i &lt; arrayLength; i++){…}</p>
+<p>这样，只需要计算一次arrayLength就可以了。 这个真的这么重要么？其实在现代浏览器中，这两种的区别是<a href="http://jsperf.com/caching-array-length/4" target="_blank" rel="noopener">微乎其微</a>的，因为浏览器引擎已经做了这种优化。那么以后是否就完全不需要考虑这些了么？让我们看一下<a href="http://www.ctomczyk.pl/to-cache-or-not-to-cache-length-property/231/" target="_blank" rel="noopener"><strong>comp.lang.javascript新闻组的Thomas Lahn的观点</strong></a>（简单但比较哲学，译不出味道来，先放弃）：</p>
+<blockquote>
+<p>One should never rely on what one cannot know. You cannot know the runtime environments code once written will be exposed to. There is no good reason to assume the value of the “length” property should be automatically cached for a loop in the first place as it could change by statements in the loop. One <strong>can</strong> know instead that avoiding to access a property repeatedly whose value does not change, in favor of a local variable that holds this value, reduces code complexity. That has a chance – and it has been showed – to increase runtime efficiency, IOW to be faster. So it is wise to do that.</p>
+</blockquote>
+<h1 id="最小化DOM操作-Minimize-DOM-operations"><a href="#最小化DOM操作-Minimize-DOM-operations" class="headerlink" title="最小化DOM操作 Minimize DOM operations"></a>最小化DOM操作 Minimize DOM operations</h1><p>写DOM是很“重”的操作。记住：<a href="http://ejohn.org/blog/the-dom-is-a-mess/" target="_blank" rel="noopener">DOM很慢</a>。如果没意识到这点，你早晚会遇到性能问题。下面是一个让浏览器不堪重负的经典案例：</p>
+<p>var toDoList = $(“#todoList”);<br>myTasks.forEach(function(task){<br>  toDoList.append(“<li id=" + task.index + ">“ + task.name + “</li>“);<br>});</p>
+<p>在这里例子里面，我们每次forEach循环都会有读&amp;写DOM的操作。实际上我们可以通过把这些节点存储在一个变量里，等到循环结束以后再一次性的把累积的变量写入DOM，从而规避这种混乱的情况。这样就只需要“附加”操作一次：</p>
+<p>var toDoList = $(“#todoList”);<br>dynamicItems = “”;</p>
+<p>myTasks.forEach(function(task){<br>  dynamicItems += “<li id=" + index + ">“ + value + “</li>“;<br>});<br>toDoList.append(dynamicItems);</p>
+<h1 id="避免重复创建对象-Avoid-repeated-object-creation"><a href="#避免重复创建对象-Avoid-repeated-object-creation" class="headerlink" title="避免重复创建对象 Avoid repeated object creation"></a>避免重复创建对象 Avoid repeated object creation</h1><p>如果在函数中创建了一个对象的话，那么这个对象在每次函数调用的时候都会被重复创建一次。这可能并不是你的本意，特别是当这个对象是静态的，你本来没准备在任何情况下改变它的时候。让我们看下<a href="http://davidwalsh.name/javascript-optimization" target="_blank" rel="noopener">David Walsh给出的例子</a>：</p>
+<p>function cleanText(dirty) {<br>  // Get rid of SCRIPT tags<br>  clean = dirty.replace(/&lt;script[^&gt;]<em>&gt;([\s\S]</em>?)&lt;\/script&gt;/gi, “”);</p>
+<p>  // Do some more cleaning, maybe whitespace, etc.</p>
+<p>  return clean;<br>}</p>
+<p>文字记号<strong>//</strong>实际上是<strong>new RegExp</strong>的缩写形式，也就是说每次使用类似<strong>/ab+c/</strong>这样的语句实际上就同时<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions" target="_blank" rel="noopener">创建了一个正则表达式对象</a>：</p>
+<p>//both expressions are equivalent<br>var re = /ab+c/;<br>var re = new RegExp(“ab+c”);</p>
+<p>在本例中，我们其实并不需要每次都创建一个正则表达式对象。可以像这面这样通过在函数外创建对象，然后在函数中调用（<em>through a closure scope–不太会翻译这句</em>）</p>
+<p>var scriptRegex = /&lt;script[^&gt;]<em>&gt;([\s\S]</em>?)&lt;\/script&gt;/gi;<br>function cleanText(dirty) {<br>  // Get rid of SCRIPT tags<br>  clean = dirty.replace(scriptRegex, “”);</p>
+<p>  // Do some more cleaning, maybe whitespace, etc.</p>
+<p>  return clean;<br>}</p>
+<h1 id="委托事件监听-Delegate-event-listeners"><a href="#委托事件监听-Delegate-event-listeners" class="headerlink" title="委托事件监听 Delegate event listeners"></a>委托事件监听 Delegate event listeners</h1><p>给单独的元素使用事件监听会占用很多内存。如果给动态创建的很多新元素一一绑定事件监听的话代价会非常高。</p>
+<p>document.querySelector(‘#todoList li’).addEventListener(“click”, function() {<br>    alert(“Clicked on a task”);<br>});</p>
+<p>如果上面代码中的#todoList里有10000个li元素的话，也就是说会有10000个事件监听器。采用<a href="http://davidwalsh.name/event-delegate" target="_blank" rel="noopener">事件托管</a>的方法可以就可以不用给每个单独的元素使用监听器，而是在这些元素的父节点上使用一个监听器就可以了。上面的例子可以修改成：</p>
+<p>document.querySelector(‘#todoList’).addEventListener(‘click’, function(e) {<br>    if (e.target &amp;&amp; e.target.tagName == ‘LI’) {<br>        alert(“Clicked on a task”);<br>    }<br>});</p>
+<p>用jQuery的话更简单了</p>
+<p>$(“#todoList”).on(“click”, ‘li’, function() {<br>    alert(“Clicked on a task”);<br>});</p>
+<h1 id="只需要使用选择器的话，别用jQuery了-Stop-using-jQuery-when-you-only-need-selectors"><a href="#只需要使用选择器的话，别用jQuery了-Stop-using-jQuery-when-you-only-need-selectors" class="headerlink" title="只需要使用选择器的话，别用jQuery了 Stop using jQuery when you only need selectors"></a>只需要使用选择器的话，别用jQuery了 Stop using jQuery when you only need selectors</h1><p>总所周知, jQuery是遍历DEOM的最佳工具。但是如果你的项目只需要使用jQuery进行这一个工作的，就需要慎重权衡下是否值得因为这个需求而加载一个外部库文件。因为使用document.querySelectorAll也可以和使用jQuery一样实现这些基本的选择功能。是的，你没看错，完全可以使用浏览器内置功能实现像document.querySelectorAll(‘.content ul li’)这样的日常选择器操作。你说这样写看起来又长又丑？让我们看一下<a href="http://flippinawesome.org/2013/05/06/5-things-you-should-stop-doing-with-jquery/" target="_blank" rel="noopener">Burke Holland</a>在他的文章<a href="http://flippinawesome.org/2013/05/06/5-things-you-should-stop-doing-with-jquery/" target="_blank" rel="noopener">5 Things You Should Stop Doing With jQuery</a>里的方法：</p>
+<div class="container"><br>  <ul><br>    <li id="pink">Pink</li><br>    <li id="salmon">Salmon</li><br>    <li id="blue">Blue</li><br>    <li id="green">Green</li><br>    <li id="red">Red</li><br>  </ul><br></div>
+
+<script>
+  // create a global '$' variable
+  window.$ = function(selector) {
+    return document.querySelector(selector);
+  };
+
+  (function() {
+    // select item1 by id and change it's background color to salmon
+    var item = $("#salmon").style.backgroundColor="salmon";
+    console.log(item);
+  }());  
+</script>
+
+<p>这样写就可以继续使用你所钟爱的$(‘mySelector’)结构了。 那么querySelectorAll和jQuery的选择器相比究竟有多快呢？这要取决于不同的浏览器，但<a href="http://jsperf.com/jquery-vs-document-queryselector" target="_blank" rel="noopener">至少快5倍</a>！尽管JQuery在document.querySelectorAll方法存在的情况下其实也是会自动调用它来实现选择器，但是我们是不是还要权衡下这多加载的90KB（jquery.mini.js文件）呢？ 还想进一步学习么？我推荐进行在Javascript中更高效的进行分析和管理数据结构（profiling and managing data structures efficiently）这方面的学习。我以后可能会围绕这块写一些东西，也可以参考下这篇<a href="http://coding.smashingmagazine.com/2012/11/05/writing-fast-memory-efficient-javascript/" target="_blank" rel="noopener">文章</a>。 本文地址: <a href="http://awebird.com/blog/art/55">http://awebird.com/blog/art/55</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://awebird.com/2013/07/11/e3-80-90-e7-bf-bb-e8-af-91-e3-80-91-e5-8d-b3-e5-ad-a6-e5-8d-b3-e7-94-a8-e7-9a-84web-e5-89-8d-e7-ab-af-e4-bc-98-e5-8c-96-e6-8a-80-e5-b7-a7-front-end-optimizations-you-can-start-doing-right-now/" data-id="cjia558ys0009n5pc58rfnjbi" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Front-end/">Front-end</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jquery/">jquery</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/optimization/">optimization</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/优化/">优化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/翻译/">翻译</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-e4-b8-ad-e8-bd-ac-e6-9c-8d-e5-8a-a1-e5-99-a8jsonp-e8-b7-a8-e5-9f-9f-e4-bd-bf-e7-94-a8cros-e8-b7-a8-e5-9f-9f" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2013/07/07/e4-b8-ad-e8-bd-ac-e6-9c-8d-e5-8a-a1-e5-99-a8jsonp-e8-b7-a8-e5-9f-9f-e4-bd-bf-e7-94-a8cros-e8-b7-a8-e5-9f-9f/" class="article-date">
@@ -110,7 +210,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://awebird.com/2013/07/07/e4-b8-ad-e8-bd-ac-e6-9c-8d-e5-8a-a1-e5-99-a8jsonp-e8-b7-a8-e5-9f-9f-e4-bd-bf-e7-94-a8cros-e8-b7-a8-e5-9f-9f/" data-id="cjia4wh3c0007l8pc15hnliqo" class="article-share-link">Share</a>
+      <a data-url="http://awebird.com/2013/07/07/e4-b8-ad-e8-bd-ac-e6-9c-8d-e5-8a-a1-e5-99-a8jsonp-e8-b7-a8-e5-9f-9f-e4-bd-bf-e7-94-a8cros-e8-b7-a8-e5-9f-9f/" data-id="cjia558yv000bn5pcmjdp3ygh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CORS/">CORS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JSONP/">JSONP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/跨域/">跨域</a></li></ul>
@@ -185,7 +285,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://awebird.com/2013/07/07/e9-83-a8-e5-88-86-e5-9b-bd-e8-a1-8candroid-e6-89-8b-e6-9c-ba-e7-bc-ba-e5-b0-91-e8-b0-b7-e6-ad-8cgsm-e6-9c-8d-e5-8a-a1-e5-8c-85-e5-af-bc-e8-87-b4html5-geolocation-e6-97-a0-e6-b3-95-e5-ae-9a-e4-bd-8d/" data-id="cjia4wh41000zl8pcl5hlj5jk" class="article-share-link">Share</a>
+      <a data-url="http://awebird.com/2013/07/07/e9-83-a8-e5-88-86-e5-9b-bd-e8-a1-8candroid-e6-89-8b-e6-9c-ba-e7-bc-ba-e5-b0-91-e8-b0-b7-e6-ad-8cgsm-e6-9c-8d-e5-8a-a1-e5-8c-85-e5-af-bc-e8-87-b4html5-geolocation-e6-97-a0-e6-b3-95-e5-ae-9a-e4-bd-8d/" data-id="cjia558zg0012n5pcjw4c599t" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GMS服务包/">GMS服务包</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Geolocation/">Geolocation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML5/">HTML5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IP定位/">IP定位</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/google/">google</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/国行/">国行</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/地图API/">地图API</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/百度/">百度</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/谷歌/">谷歌</a></li></ul>
@@ -238,7 +338,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://awebird.com/2013/07/06/e6-9c-ac-e7-a7-91-e6-af-95-e8-ae-be-e7-94-b5-e5-ad-90-e6-8a-80-e6-9c-af-e8-99-9a-e6-8b-9f-e8-af-95-e9-aa-8c-flash/" data-id="cjia4wh3u000ml8pcf1x2dzih" class="article-share-link">Share</a>
+      <a data-url="http://awebird.com/2013/07/06/e6-9c-ac-e7-a7-91-e6-af-95-e8-ae-be-e7-94-b5-e5-ad-90-e6-8a-80-e6-9c-af-e8-99-9a-e6-8b-9f-e8-af-95-e9-aa-8c-flash/" data-id="cjia558zb000vn5pcunw7fsen" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ActionScript/">ActionScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flash/">Flash</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/毕业设计/">毕业设计</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/电子技术实验/">电子技术实验</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/虚拟实验/">虚拟实验</a></li></ul>
@@ -281,7 +381,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://awebird.com/2013/07/05/e5-86-99-e5-9c-a8-e9-86-89-e5-bc-80-e5-a7-8b/" data-id="cjia4wh3n000gl8pcffpeex40" class="article-share-link">Share</a>
+      <a data-url="http://awebird.com/2013/07/05/e5-86-99-e5-9c-a8-e9-86-89-e5-bc-80-e5-a7-8b/" data-id="cjia558z3000ln5pc2p730xt2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -335,7 +435,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li></ul>
     </div>
   </div>
 
@@ -346,6 +446,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/06/11/Migration/">Migration</a>
+          </li>
         
           <li>
             <a href="/2014/12/31/2014-e5-b9-b4-e7-bb-88-e5-b0-8f-e7-bb-93/">2014年终小结</a>
@@ -361,10 +465,6 @@
         
           <li>
             <a href="/2013/09/11/e4-bd-bf-e7-94-a8fiddler-e8-b0-83-e8-af-95native-e5-92-8chybrid-app/">使用fiddler调试Native和Hybrid App</a>
-          </li>
-        
-          <li>
-            <a href="/2013/08/27/e5-9f-ba-e4-ba-8eandroid-webview-e7-9a-84hyper-app-e5-bc-80-e5-8f-91-e7-9a-84-e5-89-8d-e7-ab-af-e4-bc-98-e5-8c-96/">基于Android Webview的Hybrid App开发的前端优化</a>
           </li>
         
       </ul>
