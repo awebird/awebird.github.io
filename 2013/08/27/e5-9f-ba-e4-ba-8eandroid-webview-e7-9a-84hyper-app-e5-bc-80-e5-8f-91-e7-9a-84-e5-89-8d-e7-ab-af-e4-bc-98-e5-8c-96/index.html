@@ -16,7 +16,8 @@
 <meta property="og:description" content="最近做一个项目，是将一个相对复杂（内容后台模块化配置）的mobile web页面嵌入到Android的webview展示，把遇到的问题和一些经验总结下 （1）图片！图片！图片！ 我觉得不管是原生App还是Web App，加载优化的第一条就是合理的设置图片，这点往往容易被忽视。一切只在WIFI环境下的测试都是耍流氓！ 这个项目的主页面，一开始前端负责切图的同事给出的静态页居然有1M多，其中最大的一">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://awebird.com/images/uploads/2013/08/webview-300x102.jpg">
-<meta property="og:updated_time" content="2018-06-12T05:58:47.121Z">
+<meta property="og:image" content="http://awebird.com/images/uploads/remark/4.png">
+<meta property="og:updated_time" content="2018-06-12T07:10:30.574Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于Android Webview的Hybrid App开发的前端优化">
 <meta name="twitter:description" content="最近做一个项目，是将一个相对复杂（内容后台模块化配置）的mobile web页面嵌入到Android的webview展示，把遇到的问题和一些经验总结下 （1）图片！图片！图片！ 我觉得不管是原生App还是Web App，加载优化的第一条就是合理的设置图片，这点往往容易被忽视。一切只在WIFI环境下的测试都是耍流氓！ 这个项目的主页面，一开始前端负责切图的同事给出的静态页居然有1M多，其中最大的一">
@@ -124,11 +125,12 @@
 </ul>
 <p><strong>（7）服务器端设置 gzip etag Cache-Control</strong> gzip就不说了，总之一定要开启html css js json的gzip压缩！！！ 为了弄明白这个，非科班出身的我连着fiddler边调测边翻了小半本&lt;计算机网络&gt;的书，其实也还没完全弄明白。而且测试发现现在的浏览器特别是桌面的360(#Anti-360#)和一些国产手机浏览器，为了制造“极速”的假象，缓存处理很多地方都没有按照规范来，动不动就会过度缓存，导致页面不能及时更新。Android Webview的LOAD_CACHE_ELSE_NETWORK设置更是完全无视etag、expire time这些，强制使用缓存。 总之，这块还没完全弄明白，等后面彻底明白了再结合fiddler和apache总结下吧。给出我这边apache .htaccess相关配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;IfModule mod_deflate.c&gt;</span><br><span class="line">AddOutputFilter DEFLATE html xml php js css json</span><br><span class="line">&lt;/IfModule&gt;</span><br><span class="line"></span><br><span class="line">&lt;IfModule mod_headers.c&gt;</span><br><span class="line">    &lt;FilesMatch &quot;\\\.(ico|jpe?g|bmp|png|gif|swf|css|js|json)$&quot;&gt;</span><br><span class="line">        Header set Cache-Control &quot;max-age=2692000, public&quot;</span><br><span class="line">    &lt;/FilesMatch&gt;</span><br><span class="line">    &lt;FilesMatch &quot;\\\.(php|html)$&quot;&gt;</span><br><span class="line">        Header set Cache-Control &quot;max-age=60, private, must-revalidate&quot;</span><br><span class="line">    &lt;/FilesMatch&gt;</span><br><span class="line">    Header unset ETag</span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure></p>
 <p><strong>（8）以上都不是</strong> 其实Hybrid App的最佳实践，还是应该把所有的html css js和主要的图片资源离线存储在Android的asset文件夹下，然后由Android实现从服务器端到手机的这个www主文件夹的更新机制，这样才不用凡事从server端下载(很多人讨论webapp时只大谈特谈性能，其实一切需要加载的实现方式才是最大的“阻塞”)。这样也可以随心所欲的使用一些Sencha Touch或AngularJS+UI这样的中型和重型框架，可惜上面提到的文件更新机制没有建立，暂时还没有机会实践这种模式。这种想法的文章不多，参考<a href="http://developer.appcelerator.com/question/146564/update-apps-local-html-webviewed-files" target="_blank" rel="noopener">http://developer.appcelerator.com/question/146564/update-apps-local-html-webviewed-files</a>的reply部分 就到这里吧… <strong>本文地址：<a href="http://awebird.com/blog/art/122">http://awebird.com/blog/art/122/</a></strong></p>
+<p><a href="/images/uploads/remark/4.png"><img src="/images/uploads/remark/4.png" alt="原wordpress评论"></a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://awebird.com/2013/08/27/e5-9f-ba-e4-ba-8eandroid-webview-e7-9a-84hyper-app-e5-bc-80-e5-8f-91-e7-9a-84-e5-89-8d-e7-ab-af-e4-bc-98-e5-8c-96/" data-id="cjibavzrx000qsepc4zl2utx2" class="article-share-link">Share</a>
+      <a data-url="http://awebird.com/2013/08/27/e5-9f-ba-e4-ba-8eandroid-webview-e7-9a-84hyper-app-e5-bc-80-e5-8f-91-e7-9a-84-e5-89-8d-e7-ab-af-e4-bc-98-e5-8c-96/" data-id="cjibcghh2000qxopc6o3tefa5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hybrid-app/">hybrid app</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webview/">webview</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
