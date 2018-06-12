@@ -7,19 +7,19 @@
   
   <title>php curl返回400 bad request的问题定位与解决 | aWeBird</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="今晚花了整整一晚的时间帮同事定位一个php curl返回400 bad request的问题了，@七夕Orz.. 是一个网上流传的模拟登陆163邮箱、获取通信录的代码段google，在同事和我的开发机上都运行正常，但是部署到服务器环境上就400了 //跳转            $url = ‘http://entry.mail.163.com/coremail/fcg/ntesdoor2?li">
+  <meta name="description" content="今晚花了整整一晚的时间帮同事定位一个php curl返回400 bad request的问题了，@七夕Orz.. 是一个网上流传的模拟登陆163邮箱、获取通信录的代码段google，在同事和我的开发机上都运行正常，但是部署到服务器环境上就400了123456789101112131415//跳转			$url = &amp;apos;http://entry.mail.163.com/coremail/">
 <meta name="keywords" content="PHP,163邮箱,400,curl,stackoverflow,通信录">
 <meta property="og:type" content="article">
 <meta property="og:title" content="php curl返回400 bad request的问题定位与解决">
 <meta property="og:url" content="http://awebird.com/2013/08/14/php-curl-e8-bf-94-e5-9b-9e400-bad-request-e7-9a-84-e9-97-ae-e9-a2-98-e5-ae-9a-e4-bd-8d-e4-b8-8e-e8-a7-a3-e5-86-b3/index.html">
 <meta property="og:site_name" content="aWeBird">
-<meta property="og:description" content="今晚花了整整一晚的时间帮同事定位一个php curl返回400 bad request的问题了，@七夕Orz.. 是一个网上流传的模拟登陆163邮箱、获取通信录的代码段google，在同事和我的开发机上都运行正常，但是部署到服务器环境上就400了 //跳转            $url = ‘http://entry.mail.163.com/coremail/fcg/ntesdoor2?li">
+<meta property="og:description" content="今晚花了整整一晚的时间帮同事定位一个php curl返回400 bad request的问题了，@七夕Orz.. 是一个网上流传的模拟登陆163邮箱、获取通信录的代码段google，在同事和我的开发机上都运行正常，但是部署到服务器环境上就400了123456789101112131415//跳转			$url = &amp;apos;http://entry.mail.163.com/coremail/">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://awebird.com/images/uploads/2013/08/oops-300x191.jpg">
-<meta property="og:updated_time" content="2018-06-05T10:34:12.716Z">
+<meta property="og:updated_time" content="2018-06-12T06:01:46.245Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="php curl返回400 bad request的问题定位与解决">
-<meta name="twitter:description" content="今晚花了整整一晚的时间帮同事定位一个php curl返回400 bad request的问题了，@七夕Orz.. 是一个网上流传的模拟登陆163邮箱、获取通信录的代码段google，在同事和我的开发机上都运行正常，但是部署到服务器环境上就400了 //跳转            $url = ‘http://entry.mail.163.com/coremail/fcg/ntesdoor2?li">
+<meta name="twitter:description" content="今晚花了整整一晚的时间帮同事定位一个php curl返回400 bad request的问题了，@七夕Orz.. 是一个网上流传的模拟登陆163邮箱、获取通信录的代码段google，在同事和我的开发机上都运行正常，但是部署到服务器环境上就400了123456789101112131415//跳转			$url = &amp;apos;http://entry.mail.163.com/coremail/">
 <meta name="twitter:image" content="http://awebird.com/images/uploads/2013/08/oops-300x191.jpg">
   
     <link rel="alternate" href="/atom.xml" title="aWeBird" type="application/atom+xml">
@@ -97,28 +97,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a href="/images/uploads/2013/08/oops.jpg"><img src="/images/uploads/2013/08/oops-300x191.jpg" alt="oops"></a> 今晚花了整整一晚的时间帮同事定位一个php curl返回400 bad request的问题了，@七夕Orz.. 是一个网上流传的模拟登陆163邮箱、获取通信录的代码段<a href="https://www.google.com.hk/search?newwindow=1&amp;safe=strict&amp;biw=1313&amp;bih=683&amp;q=curl+163%E9%80%9A%E8%AE%AF%E5%BD%95&amp;oq=curl+163%E9%80%9A%E8%AE%AF%E5%BD%95&amp;gs_l=serp.12...0.0.0.13475.0.0.0.0.0.0.0.0..0.0....0...1c..24.serp..0.0.0.KtevvN3WGFE" target="_blank" rel="noopener">google</a>，在同事和我的开发机上都运行正常，但是部署到服务器环境上就400了</p>
-<p>//跳转<br>            $url = ‘<a href="http://entry.mail.163.com/coremail/fcg/ntesdoor2?lightweight=1&amp;verifycookie=1&amp;language=-1&amp;style=-1&amp;username=loki_wuxi&#39;" target="_blank" rel="noopener">http://entry.mail.163.com/coremail/fcg/ntesdoor2?lightweight=1&amp;verifycookie=1&amp;language=-1&amp;style=-1&amp;username=loki_wuxi&#39;</a>;<br>            $headers = array(‘User-Agent’ =&gt;<br>                ‘Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9) Gecko/2008052906 Firefox/3.0’);</p>
-<pre><code>$ch = curl_init($url);
-curl\_setopt($ch, CURLOPT\_RETURNTRANSFER, true);
-curl\_setopt($ch, CURLOPT\_HEADER, true);
-curl\_setopt($ch, CURLOPT\_CONNECTTIMEOUT, 120);
-curl\_setopt($ch, CURLOPT\_POST, true);
-curl\_setopt($ch, CURLOPT\_HTTPHEADER, $headers);
-curl\_setopt($ch, CURLOPT\_COOKIEFILE, COOKIEJAR);
-curl\_setopt($ch, CURLOPT\_COOKIEJAR, COOKIEJAR);
-$result = curl_exec($ch);
-curl_close($ch);
-</code></pre><p>由于两个开发环境都是windows，服务器环境是linux，所以至少花了一个小时走弯路，在COOKIEJAR文件的路径和权限上。未果 病急乱投医的试遍了网上的各种方案，最后还是沉下心来分析http header，php curl输出完整的request header，需要如下设置</p>
-<p>$ch = curl_init($url);<br>curl_setopt($ch, CURLOPT_HEADER, true);<br>curl_setopt($ch, CURLINFO_HEADER_OUT, true);<br>curl_setopt($ch, CURLOPT_NOBODY, true);<br>$result = curl_exec($ch);<br>print_r(curl_getinfo($ch));<br>curl_close($ch);</p>
-<p>对比本机和生产环境的request_header，发现主要区别在于</p>
-<p>本机的  Content-Length: 0 Content-Type: application/x-www-form-urlencoded<br>服务器  Content-Length: -1 Content-Type: application/x-www-form-urlencoded  Expect: 100-continue</p>
+        <p><a href="/images/uploads/2013/08/oops.jpg"><img src="/images/uploads/2013/08/oops-300x191.jpg" alt="oops"></a> 今晚花了整整一晚的时间帮同事定位一个php curl返回400 bad request的问题了，@七夕Orz.. 是一个网上流传的模拟登陆163邮箱、获取通信录的代码段<a href="https://www.google.com.hk/search?newwindow=1&amp;safe=strict&amp;biw=1313&amp;bih=683&amp;q=curl+163%E9%80%9A%E8%AE%AF%E5%BD%95&amp;oq=curl+163%E9%80%9A%E8%AE%AF%E5%BD%95&amp;gs_l=serp.12...0.0.0.13475.0.0.0.0.0.0.0.0..0.0....0...1c..24.serp..0.0.0.KtevvN3WGFE" target="_blank" rel="noopener">google</a>，在同事和我的开发机上都运行正常，但是部署到服务器环境上就400了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//跳转</span><br><span class="line">			$url = &apos;http://entry.mail.163.com/coremail/fcg/ntesdoor2?lightweight=1&amp;verifycookie=1&amp;language=-1&amp;style=-1&amp;username=loki_wuxi&apos;;</span><br><span class="line">			$headers = array(&apos;User-Agent&apos; =&gt;</span><br><span class="line">				&apos;Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9) Gecko/2008052906 Firefox/3.0&apos;);</span><br><span class="line"></span><br><span class="line">			$ch = curl_init($url);</span><br><span class="line">			curl\_setopt($ch, CURLOPT\_RETURNTRANSFER, true);</span><br><span class="line">			curl\_setopt($ch, CURLOPT\_HEADER, true);</span><br><span class="line">			curl\_setopt($ch, CURLOPT\_CONNECTTIMEOUT, 120);</span><br><span class="line">			curl\_setopt($ch, CURLOPT\_POST, true);</span><br><span class="line">			curl\_setopt($ch, CURLOPT\_HTTPHEADER, $headers);</span><br><span class="line">			curl\_setopt($ch, CURLOPT\_COOKIEFILE, COOKIEJAR);</span><br><span class="line">			curl\_setopt($ch, CURLOPT\_COOKIEJAR, COOKIEJAR);</span><br><span class="line">			$result = curl_exec($ch);</span><br><span class="line">			curl_close($ch);</span><br></pre></td></tr></table></figure></p>
+<p>由于两个开发环境都是windows，服务器环境是linux，所以至少花了一个小时走弯路，在COOKIEJAR文件的路径和权限上。未果 病急乱投医的试遍了网上的各种方案，最后还是沉下心来分析http header，php curl输出完整的request header，需要如下设置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ch = curl_init($url);</span><br><span class="line">curl\_setopt($ch, CURLOPT\_HEADER, true);</span><br><span class="line">curl\_setopt($ch, CURLINFO\_HEADER_OUT, true);</span><br><span class="line">curl\_setopt($ch, CURLOPT\_NOBODY, true);</span><br><span class="line">$result = curl_exec($ch);</span><br><span class="line">print\_r(curl\_getinfo($ch));</span><br><span class="line">curl_close($ch);</span><br></pre></td></tr></table></figure></p>
+<p>对比本机和生产环境的request_header，发现主要区别在于<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">本机的  Content-Length: 0 Content-Type: application/x-www-form-urlencoded</span><br><span class="line">服务器  Content-Length: -1 Content-Type: application/x-www-form-urlencoded  Expect: 100-continue</span><br></pre></td></tr></table></figure></p>
 <p>最终根据这个线索在StackoverFlow上找到这篇<a href="http://stackoverflow.com/questions/10110573/testing-php-curl-file-uploads-on-laptop-blocked-by-norton" target="_blank" rel="noopener">Testing PHP CURL file uploads on laptop (blocked by Norton) </a></p>
 <blockquote>
 <p>It looks like I had curl_setopt($CURL, CURLOPT_POST, TRUE), and that wasn’t a good idea. I removed it, and Norton doesn’t complain and the script works.</p>
 </blockquote>
-<p>把下面这行注释了就ok了，确实在没有CURLOPT_POSTFIELDS的情况下post内容为空，开启CURLOPT_POST没有意义</p>
-<p>//curl_setopt($ch, CURLOPT_POST, true);</p>
+<p>把下面这行注释了就ok了，确实在没有CURLOPT_POSTFIELDS的情况下post内容为空，开启CURLOPT_POST没有意义<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//curl\_setopt($ch, CURLOPT\_POST, true);</span><br></pre></td></tr></table></figure></p>
 <p>但是，还是要纠结一下，为什么在本机测试ok了，是不是windows和linux环境的却别？刨根问底的继续查了下，终于找到问题的根源，原来是curl的版本不一样，我本机是libcurl/7.16.0，服务器上是libcurl/7.27.0 详细解释参见 <a href="http://sevalapsha.wordpress.com/2011/08/03/curl-http11-empty-post-bug/" target="_blank" rel="noopener">http://sevalapsha.wordpress.com/2011/08/03/curl-http11-empty-post-bug/</a></p>
 <blockquote>
 <p>In the end we discovered that newer version (since 7.20) of cURL interprets missing body as a negotiation request – sends Expect: 100-continue header and Content-Length: -1.</p>
@@ -132,7 +118,7 @@ curl_close($ch);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://awebird.com/2013/08/14/php-curl-e8-bf-94-e5-9b-9e400-bad-request-e7-9a-84-e9-97-ae-e9-a2-98-e5-ae-9a-e4-bd-8d-e4-b8-8e-e8-a7-a3-e5-86-b3/" data-id="cjia558zj0016n5pcc5jg9j4t" class="article-share-link">Share</a>
+      <a data-url="http://awebird.com/2013/08/14/php-curl-e8-bf-94-e5-9b-9e400-bad-request-e7-9a-84-e9-97-ae-e9-a2-98-e5-ae-9a-e4-bd-8d-e4-b8-8e-e8-a7-a3-e5-86-b3/" data-id="cjib9r3o00012mspcesyfc2ig" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/163邮箱/">163邮箱</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/400/">400</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/curl/">curl</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stackoverflow/">stackoverflow</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/通信录/">通信录</a></li></ul>
@@ -259,7 +245,7 @@ curl_close($ch);
 </nav>
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script>
 
 
   <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">

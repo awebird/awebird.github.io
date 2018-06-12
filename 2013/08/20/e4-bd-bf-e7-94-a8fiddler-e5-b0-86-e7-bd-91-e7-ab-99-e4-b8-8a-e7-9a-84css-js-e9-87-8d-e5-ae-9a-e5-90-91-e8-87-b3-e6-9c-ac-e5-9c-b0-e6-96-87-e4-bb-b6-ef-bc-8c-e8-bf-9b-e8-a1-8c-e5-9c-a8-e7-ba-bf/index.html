@@ -23,7 +23,7 @@
 <meta property="og:image" content="http://awebird.com/images/uploads/2013/08/41-300x106.jpg">
 <meta property="og:image" content="http://awebird.com/images/uploads/2013/08/5-300x75.jpg">
 <meta property="og:image" content="http://awebird.com/images/uploads/2013/08/6.jpg">
-<meta property="og:updated_time" content="2018-06-05T10:34:12.717Z">
+<meta property="og:updated_time" content="2018-06-12T06:00:06.875Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用fiddler将网站上的css js重定向至本地文件，进行在线调试">
 <meta name="twitter:description" content="这是一篇写给公司负责切图和调样式的前端的文章。主要适用于一个项目临时需要调整下css或者js，为了一点修改让前端人员在本机搭建完整的LAMP环境，导入DB数据，确实很不方便，特别是像我们这样前后端在地理上就分离在两个城市的团队。这里是使用强大的Fiddler2，以修改本博客网站的云标签插件的样式为例。  1. 下载安装fiddler2，点击运行 http://fiddler2.com/get-f">
@@ -109,15 +109,13 @@
 <li>调试过程中不断修改js css上传到服务器，重新进入或者刷新页面很有可能使用的是浏览器的旧的缓存版本，这个时候应该先清下缓存，或者多按几次ctrl+F5强制刷新。看到上面的http result是200的话说明是从服务器获取的最新版本</li>
 <li>一般来说服务器端会对js css进行gzip压缩传输，这种情况下，可以点击右侧的黄色提示条解压后就可以看到文本的css内容了</li>
 </ul>
-<p><a href="/images/uploads/2013/08/3.jpg"><img src="/images/uploads/2013/08/3-300x184.jpg" alt="3"></a> <strong>4. 在右侧的的AutoResponder选项卡选中 下图所示的两项，点击 Add Rule</strong> <a href="/images/uploads/2013/08/4.png"><img src="/images/uploads/2013/08/4-300x113.png" alt="4"></a> <strong>5. 在右下侧的Rule Editor选择“find a file”, 弹出文件选择器，定位到svn本地目录下的相应css文件</strong> （这里是指开发方式，可以直接定位到svn或者git的client文件夹的对应css文件），这里其实就是一个重定向，当网页渲染请求服务器上的<a href="http://awebird.com/blog/wp-content/themes/twentytwelve/style.css?ver=3.6">http://awebird.com/blog/wp-content/themes/twentytwelve/style.css?ver=3.6</a>文件时根据这里的设置被重定向到本地的文件（如果本机没有，也可以根据上面的链接直接从服务器下载再重定向，也可以在fiddler邮件save and open as local file），比如C:\AppServ\www\myblog\cirrusCloud.css <a href="/images/uploads/2013/08/41.jpg"><img src="/images/uploads/2013/08/41-300x106.jpg" alt="4"></a> 在右上窗口看到新增了一条记录就是服务器到本机的重定向映射规则，以后可以随时添加和删除这些规则 <a href="/images/uploads/2013/08/5.jpg"><img src="/images/uploads/2013/08/5-300x75.jpg" alt="5"></a> <strong>6. 经过上面的操作就可以实现修改本机的css文件，调试浏览器里远程环境的效果了</strong> 比如在css中加入如下两条</p>
-<p>#cirrusCloudWidget a{<br>    color:green;<br>}</p>
-<p>#cirrusCloudWidget a:hover{<br>    border: 1px solid red;<br>    color:red;<br>}</p>
+<p><a href="/images/uploads/2013/08/3.jpg"><img src="/images/uploads/2013/08/3-300x184.jpg" alt="3"></a> <strong>4. 在右侧的的AutoResponder选项卡选中 下图所示的两项，点击 Add Rule</strong> <a href="/images/uploads/2013/08/4.png"><img src="/images/uploads/2013/08/4-300x113.png" alt="4"></a> <strong>5. 在右下侧的Rule Editor选择“find a file”, 弹出文件选择器，定位到svn本地目录下的相应css文件</strong> （这里是指开发方式，可以直接定位到svn或者git的client文件夹的对应css文件），这里其实就是一个重定向，当网页渲染请求服务器上的<a href="http://awebird.com/blog/wp-content/themes/twentytwelve/style.css?ver=3.6">http://awebird.com/blog/wp-content/themes/twentytwelve/style.css?ver=3.6</a>文件时根据这里的设置被重定向到本地的文件（如果本机没有，也可以根据上面的链接直接从服务器下载再重定向，也可以在fiddler邮件save and open as local file），比如C:\AppServ\www\myblog\cirrusCloud.css <a href="/images/uploads/2013/08/41.jpg"><img src="/images/uploads/2013/08/41-300x106.jpg" alt="4"></a> 在右上窗口看到新增了一条记录就是服务器到本机的重定向映射规则，以后可以随时添加和删除这些规则 <a href="/images/uploads/2013/08/5.jpg"><img src="/images/uploads/2013/08/5-300x75.jpg" alt="5"></a> <strong>6. 经过上面的操作就可以实现修改本机的css文件，调试浏览器里远程环境的效果了</strong> 比如在css中加入如下两条<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#cirrusCloudWidget a&#123;</span><br><span class="line">    color:green;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#cirrusCloudWidget a:hover&#123;</span><br><span class="line">    border: 1px solid red;</span><br><span class="line">    color:red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>刷新页面，可以看到云标签的字体变成绿色，被选中的标签变成红色 <a href="/images/uploads/2013/08/6.jpg"><img src="/images/uploads/2013/08/6.jpg" alt="6"></a> <strong>7. 就是这么简单</strong> 注意，你的修改并没有真的上传到服务器，别人访问网站看到的还是灰色的标签，如果本地映射的就是版本库的话，这时就可以svn commit或者git push，然后等运维更新到服务器环境就可以了。 <strong>本文地址：<a href="http://awebird.com/blog/art/108">http://awebird.com/blog/art/108/</a></strong></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://awebird.com/2013/08/20/e4-bd-bf-e7-94-a8fiddler-e5-b0-86-e7-bd-91-e7-ab-99-e4-b8-8a-e7-9a-84css-js-e9-87-8d-e5-ae-9a-e5-90-91-e8-87-b3-e6-9c-ac-e5-9c-b0-e6-96-87-e4-bb-b6-ef-bc-8c-e8-bf-9b-e8-a1-8c-e5-9c-a8-e7-ba-bf/" data-id="cjia558yx000cn5pc2suvy7i1" class="article-share-link">Share</a>
+      <a data-url="http://awebird.com/2013/08/20/e4-bd-bf-e7-94-a8fiddler-e5-b0-86-e7-bd-91-e7-ab-99-e4-b8-8a-e7-9a-84css-js-e9-87-8d-e5-ae-9a-e5-90-91-e8-87-b3-e6-9c-ac-e5-9c-b0-e6-96-87-e4-bb-b6-ef-bc-8c-e8-bf-9b-e8-a1-8c-e5-9c-a8-e7-ba-bf/" data-id="cjib9r3ne000cmspc81k6b0hw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fiddler/">fiddler</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/调试，前端/">调试，前端</a></li></ul>
@@ -244,7 +242,7 @@
 </nav>
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script>
 
 
   <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">

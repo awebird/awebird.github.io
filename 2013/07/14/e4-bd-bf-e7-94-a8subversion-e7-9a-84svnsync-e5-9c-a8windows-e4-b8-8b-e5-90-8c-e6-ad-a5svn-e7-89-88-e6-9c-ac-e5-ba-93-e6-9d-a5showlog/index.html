@@ -16,7 +16,7 @@
 <meta property="og:description" content="虽然相比如日中天的git来说早已是明日黄花，但由于历史或团队的原因，svn还是目前应用最广泛的版本控制管理工具。随着日积月累的修修改改，我们会越来越倚重于svn的showlog功能来查看某一段代码的修改记录，但是svn的所有历史版本和这些修改记录都存在服务器上，client端只有一个最新update的版本，这样如果处于离线状态或server在内网，还有像我们现在这样开发团队在不同的城市的话，那么">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://awebird.com/images/uploads/2013/07/Little_Turtle_Fly_Away-300x209.jpg">
-<meta property="og:updated_time" content="2018-06-05T10:34:12.717Z">
+<meta property="og:updated_time" content="2018-06-12T06:04:38.310Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用svnsync在windows下同步svn版本库来“极速”showlog">
 <meta name="twitter:description" content="虽然相比如日中天的git来说早已是明日黄花，但由于历史或团队的原因，svn还是目前应用最广泛的版本控制管理工具。随着日积月累的修修改改，我们会越来越倚重于svn的showlog功能来查看某一段代码的修改记录，但是svn的所有历史版本和这些修改记录都存在服务器上，client端只有一个最新update的版本，这样如果处于离线状态或server在内网，还有像我们现在这样开发团队在不同的城市的话，那么">
@@ -109,8 +109,7 @@
 <ul>
 <li><strong>svnadmin create命令新建版本库</strong></li>
 </ul>
-<p>开始菜单，输入cmd，进入命令行工具</p>
-<p>svnadmin create e:\svn_server\demoProject</p>
+<p>开始菜单，输入cmd，进入命令行工具<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svnadmin create e:\\svn_server\\demoProject</span><br></pre></td></tr></table></figure></p>
 <p>这时打开demoProject文件夹发现SVN server的目录结构和一些配置文件已经生成</p>
 <ul>
 <li><strong>demoProject/hooks下新建pre-revprop-change.bat</strong></li>
@@ -119,13 +118,11 @@
 <ul>
 <li><strong>初始化，与远程svn库关联</strong></li>
 </ul>
-<p>使用的命令如下，注意 e:/svn_server/demoProject     ——————————是本地svn版本库目录，<a href="http://211.111.222.333/svn/project/demoProject/" target="_blank" rel="noopener">http://211.111.222.333/svn/project/demoProject/</a>  —–是需要同步的项目的远程版本库目录</p>
-<p>svnsync init file:///e:/svn_server/demoProject <a href="http://211.111.222.333/svn/project/demoProject/" target="_blank" rel="noopener">http://211.111.222.333/svn/project/demoProject/</a></p>
+<p>使用的命令如下，注意 e:/svn_server/demoProject     ——————————是本地svn版本库目录，<a href="http://211.111.222.333/svn/project/demoProject/" target="_blank" rel="noopener">http://211.111.222.333/svn/project/demoProject/</a>  —–是需要同步的项目的远程版本库目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svnsync init file:///e:/svn_server/demoProject http://211.111.222.333/svn/project/demoProject/</span><br></pre></td></tr></table></figure></p>
 <ul>
 <li><strong>使用svnsync sync同步全量版本到本地</strong></li>
 </ul>
-<p>使用下面的命令，就可以把远程的版本库从0版本到最近版本事无巨细的全部同步下来，甚至包含用户的鉴权信息和所有历史版本。以后使用同样的命令也可以随时用来同步更新至最新版本。如果版本库庞大或者网络不畅，这个过程将持续较长时间，请耐心等待</p>
-<p>svnsync sync file:///e:/svn_server/demoProject</p>
+<p>使用下面的命令，就可以把远程的版本库从0版本到最近版本事无巨细的全部同步下来，甚至包含用户的鉴权信息和所有历史版本。以后使用同样的命令也可以随时用来同步更新至最新版本。如果版本库庞大或者网络不畅，这个过程将持续较长时间，请耐心等待<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svnsync sync file:///e:/svn_server/demoProject</span><br></pre></td></tr></table></figure></p>
 <ul>
 <li><strong>客户端Checkout</strong></li>
 </ul>
@@ -134,7 +131,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://awebird.com/2013/07/14/e4-bd-bf-e7-94-a8subversion-e7-9a-84svnsync-e5-9c-a8windows-e4-b8-8b-e5-90-8c-e6-ad-a5svn-e7-89-88-e6-9c-ac-e5-ba-93-e6-9d-a5showlog/" data-id="cjia558z1000hn5pcvbj9ijs6" class="article-share-link">Share</a>
+      <a data-url="http://awebird.com/2013/07/14/e4-bd-bf-e7-94-a8subversion-e7-9a-84svnsync-e5-9c-a8windows-e4-b8-8b-e5-90-8c-e6-ad-a5svn-e7-89-88-e6-9c-ac-e5-ba-93-e6-9d-a5showlog/" data-id="cjib9r3nj000hmspcym7cqawz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/showlog/">showlog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/subversion/">subversion</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/svn/">svn</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/svnsync/">svnsync</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/windows/">windows</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/日志/">日志</a></li></ul>
@@ -261,7 +258,7 @@
 </nav>
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script>
 
 
   <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">

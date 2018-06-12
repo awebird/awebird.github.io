@@ -16,7 +16,7 @@
 <meta property="og:description" content="在qq互联登录的开发中会遇到一个很麻烦的问题，就是遇到连不通的情况怎么进行调试？因为qq互联是需要提供网站的信息注册后分配appid等才能使用的，callback参数中需要指定返回到注册网站，简单的说，只有在域名所在网站的“生产环境”或者“现网环境”才能进行调试。如果生产环境不允许开发人员接入或者“流程很繁琐”的话怎么办？本文介绍了通过修改apache配置文件和修改HOSTS进行本机测试qq互联">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://awebird.com/images/uploads/2013/07/manle_qq-300x111.jpg">
-<meta property="og:updated_time" content="2018-06-05T10:34:12.717Z">
+<meta property="og:updated_time" content="2018-06-12T06:03:15.936Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="通过修改apache配置文件和HOSTS在本机测试QQ互联登录的方法">
 <meta name="twitter:description" content="在qq互联登录的开发中会遇到一个很麻烦的问题，就是遇到连不通的情况怎么进行调试？因为qq互联是需要提供网站的信息注册后分配appid等才能使用的，callback参数中需要指定返回到注册网站，简单的说，只有在域名所在网站的“生产环境”或者“现网环境”才能进行调试。如果生产环境不允许开发人员接入或者“流程很繁琐”的话怎么办？本文介绍了通过修改apache配置文件和修改HOSTS进行本机测试qq互联">
@@ -97,22 +97,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a href="/images/uploads/2013/07/manle_qq.jpg"><img src="/images/uploads/2013/07/manle_qq-300x111.jpg" alt="manle_qq"></a> 在qq互联登录的开发中会遇到一个很麻烦的问题，就是遇到连不通的情况怎么进行调试？因为qq互联是需要提供网站的信息注册后分配appid等才能使用的，callback参数中需要指定返回到注册网站，简单的说，只有在域名所在网站的“生产环境”或者“现网环境”才能进行调试。如果生产环境不允许开发人员接入或者“流程很繁琐”的话怎么办？本文介绍了通过修改apache配置文件和修改HOSTS进行本机测试qq互联的方法。 假设申请qq互联登录的生产环境的域名是 <a href="http://www.awebird.com" target="_blank" rel="noopener">www.awebird.com</a> 本地的网站根目录（apache）的路径是 C:\AppServ\www\awebird <strong>（1）修改apache的配置文件</strong> C:\AppServ\Apache2.2\conf\httpd.conf (修改前先备份)</p>
-<p><directory "c:="" appserv="" www"=""><br>和<br>DocumentRoot “C:/AppServ/www”</directory></p>
-<p>这两行分别修改为</p>
-<p><directory "c:="" appserv="" www="" awebird"=""><br>和<br>DocumentRoot “C:/AppServ/www/awebird”</directory></p>
-<p>修改完后需要重启apache，如果是appserv集成包的话可以到 开始菜单-所有程序-AppServ-Control Server by Service-Apache Restart 进行重启 <strong>（2）修改HOSTS文件</strong> C:\Windows\System32\drivers\etc\HOSTS 最后增加下面两行并保存</p>
-<p>127.0.0.1 awebird.com<br>127.0.0.1 <a href="http://www.awebird.com" target="_blank" rel="noopener">www.awebird.com</a></p>
-<p><strong>（3）修改程序的配置文件</strong> 经过如上两步操作之后，可以实验下在浏览器输入<a href="http://www.awebird.com" target="_blank" rel="noopener">www.awebird.com</a>, 就是本机的127.0.0.1/awebird/ 的网站内容，当然对于大部分的系统来说，还需要改一下配置文件，比如C:\AppServ\www\awebird\config.php中的</p>
-<p>$site_url=’<a href="http://www.awebird.com&#39;" target="_blank" rel="noopener">http://www.awebird.com&#39;</a>;</p>
-<p>修改为</p>
-<p>$site_url=’<a href="http://127.0.0.1/awebird&#39;" target="_blank" rel="noopener">http://127.0.0.1/awebird&#39;</a>;</p>
+        <p><a href="/images/uploads/2013/07/manle_qq.jpg"><img src="/images/uploads/2013/07/manle_qq-300x111.jpg" alt="manle_qq"></a> 在qq互联登录的开发中会遇到一个很麻烦的问题，就是遇到连不通的情况怎么进行调试？因为qq互联是需要提供网站的信息注册后分配appid等才能使用的，callback参数中需要指定返回到注册网站，简单的说，只有在域名所在网站的“生产环境”或者“现网环境”才能进行调试。如果生产环境不允许开发人员接入或者“流程很繁琐”的话怎么办？本文介绍了通过修改apache配置文件和修改HOSTS进行本机测试qq互联的方法。 假设申请qq互联登录的生产环境的域名是 <a href="http://www.awebird.com" target="_blank" rel="noopener">www.awebird.com</a> 本地的网站根目录（apache）的路径是 C:\AppServ\www\awebird <strong>（1）修改apache的配置文件</strong> C:\AppServ\Apache2.2\conf\httpd.conf (修改前先备份)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Directory &quot;C:/AppServ/www&quot;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>和<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DocumentRoot &quot;C:/AppServ/www&quot;</span><br></pre></td></tr></table></figure></p>
+<p>这两行分别修改为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Directory &quot;C:/AppServ/www/awebird&quot;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>和<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DocumentRoot &quot;C:/AppServ/www/awebird&quot;</span><br></pre></td></tr></table></figure></p>
+<p>修改完后需要重启apache，如果是appserv集成包的话可以到 开始菜单-所有程序-AppServ-Control Server by Service-Apache Restart 进行重启 <strong>（2）修改HOSTS文件</strong> C:\Windows\System32\drivers\etc\HOSTS 最后增加下面两行并保存<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1 awebird.com</span><br><span class="line">127.0.0.1 www.awebird.com</span><br></pre></td></tr></table></figure></p>
+<p><strong>（3）修改程序的配置文件</strong> 经过如上两步操作之后，可以实验下在浏览器输入<a href="http://www.awebird.com" target="_blank" rel="noopener">www.awebird.com</a>, 就是本机的127.0.0.1/awebird/ 的网站内容，当然对于大部分的系统来说，还需要改一下配置文件，比如C:\AppServ\www\awebird\config.php中的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$site_url=&apos;http://www.awebird.com&apos;;</span><br></pre></td></tr></table></figure></p>
+<p>修改为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$site_url=&apos;http://127.0.0.1/awebird&apos;;</span><br></pre></td></tr></table></figure></p>
 <p>上面的修改和文件夹路径只是举例，请根据实际情况修改 <strong>（4）最后</strong> 经过以上操作，就可以在本机测试qq互联这种需要依赖实际域名的功能了，是不是很方便。 当然，测试完成后不要忘记把上面的都修改回来，否则在本机就无法“真正”的访问到实际域名的数据了 <strong>本文地址：<a href="http://awebird.com/blog/art/86">http://awebird.com/blog/art/86</a></strong></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://awebird.com/2013/07/19/e9-80-9a-e8-bf-87-e4-bf-ae-e6-94-b9apache-e9-85-8d-e7-bd-ae-e6-96-87-e4-bb-b6-e5-92-8chosts-e5-9c-a8-e6-9c-ac-e6-9c-ba-e6-b5-8b-e8-af-95qq-e4-ba-92-e8-81-94-e7-9a-84-e6-96-b9-e6-b3-95/" data-id="cjia558zd000yn5pcd0prwf98" class="article-share-link">Share</a>
+      <a data-url="http://awebird.com/2013/07/19/e9-80-9a-e8-bf-87-e4-bf-ae-e6-94-b9apache-e9-85-8d-e7-bd-ae-e6-96-87-e4-bb-b6-e5-92-8chosts-e5-9c-a8-e6-9c-ac-e6-9c-ba-e6-b5-8b-e8-af-95qq-e4-ba-92-e8-81-94-e7-9a-84-e6-96-b9-e6-b3-95/" data-id="cjib9r3nv000vmspcub2gfjf3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apache/">apache</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hosts/">hosts</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/httpd-conf/">httpd.conf</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/qq互联/">qq互联</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/qq登录/">qq登录</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/本机/">本机</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/测试/">测试</a></li></ul>
@@ -239,7 +236,7 @@
 </nav>
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script>
 
 
   <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
